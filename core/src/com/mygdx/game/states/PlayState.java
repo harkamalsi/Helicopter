@@ -12,7 +12,7 @@ import java.awt.Rectangle;
 import java.awt.Window;
 
 public class PlayState extends State {
-    private static final int HELICOPTER_COUNT = 5;
+    private static final int HELICOPTER_COUNT = 1;
     private static final int MIN = 50;
     private static final int MAX = 450;
 

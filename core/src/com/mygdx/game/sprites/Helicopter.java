@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
@@ -20,7 +21,7 @@ public class Helicopter {
 
     private Vector2 velocity;
 
-    private Vector3 mousePosition;
+    private Vector2 mousePosition;
 
     private boolean changeDirection = false;
 
@@ -53,9 +54,10 @@ public class Helicopter {
 
         position = new Vector2(x, y);
         //velocity = new Vector2(10, 0);
-        velocity = new Vector2(getRandomMovement(), getRandomMovement());
+        //velocity = new Vector2(getRandomMovement(), getRandomMovement());
+        velocity = new Vector2(0,1);
 
-        mousePosition = new Vector3(0, 0, 0);
+        mousePosition = new Vector2(0, 0);
 
         roof = new Rectangle(0, MyGdxGame.HEIGHT, MyGdxGame.WIDTH, 10);
         ground = new Rectangle(0, 0, MyGdxGame.WIDTH, 10);
@@ -95,9 +97,10 @@ public class Helicopter {
             heliBounds.setPosition(position.x, position.y);
         }*/
 
-        mousePosition.set(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY(), 0);
+        mousePosition.set(Gdx.input.getX() - Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 - Gdx.input.getY());
 
-
+        float angle = MathUtils.radiansToDegrees * (MathUtils.atan2(mousePosition.y - (helicopter.getRegionHeight() / 2 + position.y),
+                mousePosition.x - (helicopter.getRegionWidth() / 2 + position.x)));
 
         if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
             if(position.y >= 0) {
@@ -105,13 +108,15 @@ public class Helicopter {
 
                 position.add(velocity.x, velocity.y);
                 heliBounds.setPosition(position.x, position.y);
-
             }
         } else if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
             if(position.y >= 0) {
                 if(collides() == -1) {
-                    position.add(mousePosition.x,
-                            Gdx.graphics.getHeight() - helicopter.getRegionHeight());
+                    position.add(mapMouseToVelocity(mousePosition).x, mapMouseToVelocity(mousePosition).y);
+                    //Gdx.graphics.getHeight() - helicopter.getRegionHeight()
+                    heliBounds.setPosition(position.x, position.y);
+                } else {
+                    position.set(position.x, position.y);
                     heliBounds.setPosition(position.x, position.y);
                 }
             }
@@ -132,6 +137,27 @@ public class Helicopter {
         //    velocity.add(MOVEMENT.x, MOVEMENT.y);
         //velocity.scl(dt);
         //position.add(velocity.x * dt, velocity.y * dt);
+    }
+
+    public Vector2 mapMouseToVelocity(Vector2 mousePosition) {
+        Vector2 output = new Vector2(
+                getMapping(mousePosition.x,
+                        -Gdx.graphics.getWidth() / 2,
+                        Gdx.graphics.getWidth() / 2,
+                        -10,
+                        10),
+                getMapping(mousePosition.y,
+                        -Gdx.graphics.getHeight() / 2,
+                        Gdx.graphics.getHeight() / 2,
+                        -10,
+                        10));
+
+
+        return output;
+    }
+
+    private float getMapping(float value, float A, float B, float a, float b) {
+        return ((value - A) * (b - a) / (B - A)) + a;
     }
 
     public Vector2 getPosition() {return position;}
