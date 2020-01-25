@@ -32,7 +32,7 @@ public class PlayState extends State {
         helicopters = new Array<Helicopter>();
 
         for (int i=1; i <= HELICOPTER_COUNT; i++){
-            helicopters.add(new Helicopter(getRandomSpawn(), getRandomSpawn()));
+            helicopters.add(new Helicopter(getRandomSpawn(), getRandomSpawn(), cam));
         }
     }
 
@@ -134,8 +134,10 @@ public class PlayState extends State {
                     helicopters.get(i).getTexture().getRegionHeight() / 2,
                     helicopters.get(i).getTexture().getRegionWidth(),
                     helicopters.get(i).getTexture().getRegionHeight(),
-                    helicopters.get(i).getScale(),1,
+                    helicopters.get(i).getScale(),
+                    1,
                     0);
+            //helicopters.get(i).getVelocity().angle()
         }
 
         sb.end();

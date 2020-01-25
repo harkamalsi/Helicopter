@@ -1,10 +1,13 @@
 package com.mygdx.game.sprites;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.mygdx.game.MyGdxGame;
 
@@ -13,7 +16,11 @@ public class Helicopter {
     private static final int MIN = 5;
     private static final int MAX = 10;
 
+    private OrthographicCamera cam;
+
     private Vector2 velocity;
+
+    private Vector3 mousePosition;
 
     private boolean changeDirection = false;
 
@@ -40,11 +47,15 @@ public class Helicopter {
     //.ogg format
     //private Sound blades;
 
-    public Helicopter(int x, int y) {
+    public Helicopter(int x, int y, OrthographicCamera cam) {
+
+        this.cam = cam;
 
         position = new Vector2(x, y);
         //velocity = new Vector2(10, 0);
         velocity = new Vector2(getRandomMovement(), getRandomMovement());
+
+        mousePosition = new Vector3(0, 0, 0);
 
         roof = new Rectangle(0, MyGdxGame.HEIGHT, MyGdxGame.WIDTH, 10);
         ground = new Rectangle(0, 0, MyGdxGame.WIDTH, 10);
@@ -84,13 +95,26 @@ public class Helicopter {
             heliBounds.setPosition(position.x, position.y);
         }*/
 
+        mousePosition.set(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY(), 0);
 
 
-        if(position.y >= 0) {
-            position.add(velocity.x, velocity.y);
-            heliBounds.setPosition(position.x, position.y);
 
-            if(collides() != -1) changeDirectionVelocity();
+        if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+            if(position.y >= 0) {
+                if(collides() != -1) changeDirectionVelocity();
+
+                position.add(velocity.x, velocity.y);
+                heliBounds.setPosition(position.x, position.y);
+
+            }
+        } else if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
+            if(position.y >= 0) {
+                if(collides() == -1) {
+                    position.add(mousePosition.x,
+                            Gdx.graphics.getHeight() - helicopter.getRegionHeight());
+                    heliBounds.setPosition(position.x, position.y);
+                }
+            }
         }
 
         //System.out.println(velocity);
