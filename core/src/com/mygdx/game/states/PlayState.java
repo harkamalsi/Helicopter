@@ -30,7 +30,7 @@ public class PlayState extends State {
         helicopters = new Array<Helicopter>();
 
         for (int i=1; i <= HELICOPTER_COUNT; i++){
-            helicopters.add(new Helicopter(5, 10));
+            helicopters.add(new Helicopter(getRandomSpawn(), getRandomSpawn()));
         }
     }
 
@@ -65,9 +65,9 @@ public class PlayState extends State {
         handleInput();
         helicopter.update(dt);
 
-        //for (int i=1; i <= helicopters.length ; i++){
-        //    helicopters.get(i).update(dt);
-        //}
+        for (int i=0; i <= helicopters.size-1 ; i++){
+            helicopters.get(i).update(dt);
+        }
 
         //cam.position.x = helicopter.getPosition().x + 80;
         //cam.update();
@@ -97,17 +97,17 @@ public class PlayState extends State {
         //draw(Texture texture, float x, float y, float originX, float originY, float width, float height, float scaleX, float scaleY,
         // float rotation, int srcX, int srcY, int srcWidth, int srcHeight, boolean flipX, boolean flipY)
 
-        sb.draw(helicopter.getTexture(),helicopter.getPosition().x,helicopter.getPosition().y,
+        /*sb.draw(helicopter.getTexture(),helicopter.getPosition().x,helicopter.getPosition().y,
                 MyGdxGame.WIDTH, MyGdxGame.HEIGHT, helicopter.getTexture().getRegionWidth(),
-                helicopter.getTexture().getRegionHeight(),1,1,angle);
+                helicopter.getTexture().getRegionHeight(),1,1,angle);*/
         //sb.draw(helicopter.getTexture(), helicopter.getPosition().x, helicopter.getPosition().y,MyGdxGame.WIDTH / 2, MyGdxGame.HEIGHT / 2,
         //        helicopter.getTexture().getWidth(),helicopter.getTexture().getHeight(),(float) 1, (float) 1,angle, 0, 0, 0, 0, false, false);
 
         //sb.draw(helicopter.getTexture(), helicopter.getPosition().x, helicopter.getPosition().y);
 
-        //for (int i=1; i <= helicopters.length ; i++){
-        //    sb.draw(helicopters.get(i).getTexture(), helicopters.get(i).getPosition().x, helicopters.get(i).getPosition().y);
-        //}
+        for (int i=0; i <= helicopters.size-1 ; i++){
+            sb.draw(helicopters.get(i).getTexture(), helicopters.get(i).getPosition().x, helicopters.get(i).getPosition().y);
+        }
 
         sb.end();
     }
