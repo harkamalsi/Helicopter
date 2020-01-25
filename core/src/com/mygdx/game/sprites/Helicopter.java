@@ -111,13 +111,27 @@ public class Helicopter {
             }
         } else if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
             if(position.y >= 0) {
+                // -1 = No collision
                 if(collides() == -1) {
                     position.add(mapMouseToVelocity(mousePosition).x, mapMouseToVelocity(mousePosition).y);
                     //Gdx.graphics.getHeight() - helicopter.getRegionHeight()
                     heliBounds.setPosition(position.x, position.y);
                 } else {
-                    position.set(position.x, position.y);
-                    heliBounds.setPosition(position.x, position.y);
+                    heliBounds.setPosition(position.x + mapMouseToVelocity(mousePosition, true).x,
+                            position.y + mapMouseToVelocity(mousePosition, true).y);
+                    System.out.println("HeliB1: " + heliBounds);
+                    //Not collision anymore
+                    if(collides() == -1) {
+                        position.add(mapMouseToVelocity(mousePosition).x, mapMouseToVelocity(mousePosition).y);
+                        heliBounds.setPosition(position.x, position.y);
+                    } else {
+                        System.out.println("Pos: " + position);
+                        heliBounds.setPosition(position.x, position.y);
+                        System.out.println("HeliB2: " + heliBounds);
+                    }
+
+
+                    //position.set(position.x, position.y);
                 }
             }
         }
@@ -152,8 +166,28 @@ public class Helicopter {
                         -10,
                         10));
 
-
         return output;
+    }
+
+    public Vector2 mapMouseToVelocity(Vector2 mousePosition, boolean collision) {
+        if (collision) {
+            //Made it little powerfull to get out of collision zone
+            Vector2 output = new Vector2(
+                    getMapping(mousePosition.x,
+                            -Gdx.graphics.getWidth() / 2,
+                            Gdx.graphics.getWidth() / 2,
+                            -30,
+                            30),
+                    getMapping(mousePosition.y,
+                            -Gdx.graphics.getHeight() / 2,
+                            Gdx.graphics.getHeight() / 2,
+                            -30,
+                            30));
+            return output;
+
+        }
+
+        return mapMouseToVelocity(mousePosition);
     }
 
     private float getMapping(float value, float A, float B, float a, float b) {
