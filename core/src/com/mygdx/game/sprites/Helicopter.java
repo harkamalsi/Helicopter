@@ -17,8 +17,6 @@ public class Helicopter {
     private static final int MIN = 5;
     private static final int MAX = 10;
 
-    private OrthographicCamera cam;
-
     private Vector2 velocity;
 
     private Vector2 mousePosition;
@@ -48,9 +46,7 @@ public class Helicopter {
     //.ogg format
     //private Sound blades;
 
-    public Helicopter(int x, int y, OrthographicCamera cam) {
-
-        this.cam = cam;
+    public Helicopter(int x, int y) {
 
         position = new Vector2(x, y);
         //velocity = new Vector2(10, 0);
@@ -103,7 +99,6 @@ public class Helicopter {
                 mousePosition.x - (helicopter.getRegionWidth() / 2 + position.x)));
 
         if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
-            velocity.set(0,0);
             if(position.y >= 0) {
                 if(collides() != -1) changeDirectionVelocity();
 

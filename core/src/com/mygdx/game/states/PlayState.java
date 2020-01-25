@@ -13,7 +13,7 @@ import java.awt.Rectangle;
 import java.awt.Window;
 
 public class PlayState extends State {
-    private static final int HELICOPTER_COUNT = 1;
+    private static final int HELICOPTER_COUNT = 3;
     private static final int MIN = 50;
     private static final int MAX = 450;
 
@@ -37,7 +37,7 @@ public class PlayState extends State {
         font = new BitmapFont();
 
         for (int i=1; i <= HELICOPTER_COUNT; i++){
-            helicopters.add(new Helicopter(getRandomSpawn(), getRandomSpawn(), cam));
+            helicopters.add(new Helicopter(getRandomSpawn(), getRandomSpawn()));
         }
     }
 
@@ -143,8 +143,8 @@ public class PlayState extends State {
                    1,
                     0);
             //helicopters.get(i).getVelocity().angle()
-            font.draw(sb, helicopters.get(i).getPosition().toString(), 10 + 10*i, (int) (Gdx.graphics.getHeight() * 1.5));
         }
+            font.draw(sb, helicopters.get(0).getPosition().toString(), 10 + 100*0, (int) (Gdx.graphics.getHeight() * 1.5));
 
         sb.end();
     }
