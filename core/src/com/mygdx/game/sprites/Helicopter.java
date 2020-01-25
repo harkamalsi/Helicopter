@@ -14,7 +14,7 @@ import com.mygdx.game.MyGdxGame;
 
 public class Helicopter {
 
-    private static final int MIN = 5;
+    private static final int MIN = -10;
     private static final int MAX = 10;
 
     private Vector2 velocity;
@@ -50,8 +50,8 @@ public class Helicopter {
 
         position = new Vector2(x, y);
         //velocity = new Vector2(10, 0);
-        //velocity = new Vector2(getRandomMovement(), getRandomMovement());
-        velocity = new Vector2(10,10);
+        velocity = new Vector2(getRandomMovement(), getRandomMovement());
+        //velocity = new Vector2(10,10);
 
         mousePosition = new Vector2(0, 0);
 
@@ -104,6 +104,10 @@ public class Helicopter {
 
                 position.add(velocity.x, velocity.y);
                 heliBounds.setPosition(position.x, position.y);
+
+                if(Gdx.input.isKeyPressed(Input.Keys.R)) {
+                    velocity.set(MathUtils.random(-10, 10), MathUtils.random(-10, 10));
+                }
             }
         } else if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
             velocity.set(0,0);

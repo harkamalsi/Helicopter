@@ -57,16 +57,6 @@ public class PlayState extends State {
         }
     }
 
-    //private void startSingleHelicopter() {
-    //    helicopter.update();
-    //}
-
-    private void startMultipleHelicopters() {
-        //for (int i=1; i <= helicopters.length ; i++){
-        //    helicopters.get(i).start();
-        //}
-    }
-
     @Override
     protected void update(float dt) {
         handleInput();
@@ -145,6 +135,7 @@ public class PlayState extends State {
             //helicopters.get(i).getVelocity().angle()
         }
             font.draw(sb, helicopters.get(0).getPosition().toString(), 10 + 100*0, (int) (Gdx.graphics.getHeight() * 1.5));
+            font.draw(sb, "Press R for reset", 10, (int) (Gdx.graphics.getHeight() * 1.1));
 
         sb.end();
     }
