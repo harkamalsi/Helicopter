@@ -37,7 +37,7 @@ public class Helicopter {
 
     private Rectangle heliBounds;
 
-    private int scale = -1;
+    private int scaleX = -1;
 
     private TextureRegion helicopter;
     //private Texture helicopter;
@@ -55,7 +55,7 @@ public class Helicopter {
         position = new Vector2(x, y);
         //velocity = new Vector2(10, 0);
         //velocity = new Vector2(getRandomMovement(), getRandomMovement());
-        velocity = new Vector2(0,1);
+        velocity = new Vector2(10,10);
 
         mousePosition = new Vector2(0, 0);
 
@@ -103,6 +103,7 @@ public class Helicopter {
                 mousePosition.x - (helicopter.getRegionWidth() / 2 + position.x)));
 
         if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+            velocity.set(0,0);
             if(position.y >= 0) {
                 if(collides() != -1) changeDirectionVelocity();
 
@@ -110,15 +111,25 @@ public class Helicopter {
                 heliBounds.setPosition(position.x, position.y);
             }
         } else if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
+            velocity.set(0,0);
             if(position.y >= 0) {
                 // -1 = No collision
                 if(collides() == -1) {
-                    position.add(mapMouseToVelocity(mousePosition).x, mapMouseToVelocity(mousePosition).y);
+                    velocity.add(mapMouseToVelocity(mousePosition).x, mapMouseToVelocity(mousePosition).y);
+                    position.add(velocity.x, velocity.y);
                     //Gdx.graphics.getHeight() - helicopter.getRegionHeight()
                     heliBounds.setPosition(position.x, position.y);
+
+                    if (velocity.x >= 0) {
+                        scaleX = -1;
+                    } else {
+                        scaleX = 1;
+                    }
                 } else {
-                    heliBounds.setPosition(position.x + mapMouseToVelocity(mousePosition, true).x,
-                            position.y + mapMouseToVelocity(mousePosition, true).y);
+                    velocity.add(mapMouseToVelocity(mousePosition, true).x,
+                            mapMouseToVelocity(mousePosition, true).y);
+                    heliBounds.setPosition(position.x + velocity.x,
+                            position.y + velocity.y);
                     System.out.println("HeliB1: " + heliBounds);
                     //Not collision anymore
                     if(collides() == -1) {
@@ -240,7 +251,7 @@ public class Helicopter {
         float prevVelocityY = velocity.y;
 
         velocity.set(-prevVelocityX, -prevVelocityY);
-        scale = scale * -1;
+        scaleX = scaleX * -1;
 
     }
 
@@ -248,8 +259,8 @@ public class Helicopter {
         return velocity;
     }
 
-    public int getScale() {
-        return scale;
+    public int getScaleX() {
+        return scaleX;
     }
 }
 

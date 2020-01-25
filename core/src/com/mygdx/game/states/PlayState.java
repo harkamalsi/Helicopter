@@ -2,6 +2,7 @@ package com.mygdx.game.states;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
@@ -21,6 +22,8 @@ public class PlayState extends State {
 
     private Array<Helicopter> helicopters;
 
+    private BitmapFont font;
+
     public PlayState(GameStateManager gsm) {
         super(gsm);
         cam.setToOrtho(false, MyGdxGame.WIDTH, MyGdxGame.HEIGHT);
@@ -30,6 +33,8 @@ public class PlayState extends State {
         background = new Texture("bg.png");
 
         helicopters = new Array<Helicopter>();
+
+        font = new BitmapFont();
 
         for (int i=1; i <= HELICOPTER_COUNT; i++){
             helicopters.add(new Helicopter(getRandomSpawn(), getRandomSpawn(), cam));
@@ -134,10 +139,11 @@ public class PlayState extends State {
                     helicopters.get(i).getTexture().getRegionHeight() / 2,
                     helicopters.get(i).getTexture().getRegionWidth(),
                     helicopters.get(i).getTexture().getRegionHeight(),
-                    helicopters.get(i).getScale(),
-                    1,
+                    helicopters.get(i).getScaleX(),
+                   1,
                     0);
             //helicopters.get(i).getVelocity().angle()
+            font.draw(sb, helicopters.get(i).getPosition().toString(), 10 + 10*i, (int) (Gdx.graphics.getHeight() * 1.5));
         }
 
         sb.end();
