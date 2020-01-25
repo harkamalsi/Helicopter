@@ -29,7 +29,10 @@ public class Helicopter {
 
     private Rectangle heliBounds;
 
+    private int scale = -1;
+
     private TextureRegion helicopter;
+    //private Texture helicopter;
 
     //private Animation helicopterAnimation;
     //private Texture texture;
@@ -48,8 +51,11 @@ public class Helicopter {
         leftWall = new Rectangle(0, 0, 10, MyGdxGame.HEIGHT);
         rightWall = new Rectangle(MyGdxGame.WIDTH, 0, 10, MyGdxGame.HEIGHT);
 
+        //helicopter = new TextureRegion(new Texture("attackhelicopter.png"));
+        //heliBounds = new Rectangle(x, y, helicopter.getRegionWidth(), helicopter.getRegionWidth());
+
         helicopter = new TextureRegion(new Texture("attackhelicopter.png"));
-        heliBounds = new Rectangle(x, y, helicopter.getRegionWidth(), helicopter.getRegionWidth());
+        heliBounds = new Rectangle(x, y, helicopter.getRegionWidth(), helicopter.getRegionHeight());
         //helicopterAnimation = new Animation(new TextureRegion(texture), 3, 0.5f);
         //blades = Gdx.audio.newSound(Gdx.files.internal("sfx_blades.ogg"));
     }
@@ -84,7 +90,7 @@ public class Helicopter {
             position.add(velocity.x, velocity.y);
             heliBounds.setPosition(position.x, position.y);
 
-            if(collides() != -1) changeDirectionVelocity(true);
+            if(collides() != -1) changeDirectionVelocity();
         }
 
         //System.out.println(velocity);
@@ -145,16 +151,21 @@ public class Helicopter {
         return -1;
     }
 
-    public void changeDirectionVelocity(boolean checkChange) {
+    public void changeDirectionVelocity() {
         float prevVelocityX = velocity.x;
         float prevVelocityY = velocity.y;
 
-        if (checkChange) velocity.set(-prevVelocityX, -prevVelocityY);
+        velocity.set(-prevVelocityX, -prevVelocityY);
+        scale = scale * -1;
 
     }
 
     public Vector2 getVelocity() {
         return velocity;
+    }
+
+    public int getScale() {
+        return scale;
     }
 }
 

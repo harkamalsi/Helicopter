@@ -24,7 +24,9 @@ public class PlayState extends State {
     public PlayState(GameStateManager gsm) {
         super(gsm);
         cam.setToOrtho(false, MyGdxGame.WIDTH, MyGdxGame.HEIGHT);
-        helicopter = new Helicopter(getRandomSpawn(), getRandomSpawn());
+        //helicopter = new Helicopter(getRandomSpawn(), getRandomSpawn());
+        //helicopter = new Helicopter(10,10);
+
         background = new Texture("bg.png");
 
         helicopters = new Array<Helicopter>();
@@ -63,7 +65,7 @@ public class PlayState extends State {
     @Override
     protected void update(float dt) {
         handleInput();
-        helicopter.update(dt);
+        // helicopter.update(dt);
 
         for (int i=0; i <= helicopters.size-1 ; i++){
             helicopters.get(i).update(dt);
@@ -86,20 +88,38 @@ public class PlayState extends State {
         //float angle = (float) (Math.atan2(helicopter.getVelocity().y, helicopter.getVelocity().x) -
         //        Math.atan2(originLine.x, originLine.y));
 
-        float lineX = helicopter.getPosition().x - MyGdxGame.WIDTH / 2;
-        float lineY = helicopter.getPosition().y - MyGdxGame.HEIGHT / 2;
+        /*float lineX = helicopter.getPosition().x; //- MyGdxGame.WIDTH / 2;
+        float lineY = helicopter.getPosition().y; //- MyGdxGame.HEIGHT / 2;
         float tan = lineY/lineX;
         float angle = (float) Math.atan((double) tan);
 
-        System.out.println(angle);
+        float degreeAngle = (float) Math.toDegrees(angle);*/
 
         // Following: SpriteBatch.draw(textureRegion, x, y, originX, originY, width, height, scaleX, scaleY, rotation);
         //draw(Texture texture, float x, float y, float originX, float originY, float width, float height, float scaleX, float scaleY,
         // float rotation, int srcX, int srcY, int srcWidth, int srcHeight, boolean flipX, boolean flipY)
 
-        /*sb.draw(helicopter.getTexture(),helicopter.getPosition().x,helicopter.getPosition().y,
-                MyGdxGame.WIDTH, MyGdxGame.HEIGHT, helicopter.getTexture().getRegionWidth(),
-                helicopter.getTexture().getRegionHeight(),1,1,angle);*/
+        /*sb.draw(helicopter.getTexture(),
+                helicopter.getPosition().x,
+                helicopter.getPosition().y,
+                helicopter.getTexture().getRegionWidth() / 2,
+                helicopter.getTexture().getRegionHeight() / 2,
+                helicopter.getTexture().getRegionWidth(),
+                helicopter.getTexture().getRegionHeight(),
+                1,1,
+                degreeAngle);*/
+
+        /*sb.draw(helicopter.getTexture(),
+                helicopter.getPosition().x,
+                helicopter.getPosition().y,
+                helicopter.getTexture().getRegionWidth() / 2,
+                helicopter.getTexture().getRegionHeight() / 2,
+                helicopter.getTexture().getRegionWidth(),
+                helicopter.getTexture().getRegionHeight(),
+                helicopter.getScale(),1,
+                degreeAngle);*/
+
+
         //sb.draw(helicopter.getTexture(), helicopter.getPosition().x, helicopter.getPosition().y,MyGdxGame.WIDTH / 2, MyGdxGame.HEIGHT / 2,
         //        helicopter.getTexture().getWidth(),helicopter.getTexture().getHeight(),(float) 1, (float) 1,angle, 0, 0, 0, 0, false, false);
 
@@ -107,6 +127,15 @@ public class PlayState extends State {
 
         for (int i=0; i <= helicopters.size-1 ; i++){
             sb.draw(helicopters.get(i).getTexture(), helicopters.get(i).getPosition().x, helicopters.get(i).getPosition().y);
+            sb.draw(helicopters.get(i).getTexture(),
+                    helicopters.get(i).getPosition().x,
+                    helicopters.get(i).getPosition().y,
+                    helicopters.get(i).getTexture().getRegionWidth() / 2,
+                    helicopters.get(i).getTexture().getRegionHeight() / 2,
+                    helicopters.get(i).getTexture().getRegionWidth(),
+                    helicopters.get(i).getTexture().getRegionHeight(),
+                    helicopters.get(i).getScale(),1,
+                    0);
         }
 
         sb.end();
