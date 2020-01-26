@@ -65,7 +65,7 @@ public class Helicopter {
         //heliBounds = new Rectangle(x, y, helicopter.getRegionWidth(), helicopter.getRegionWidth());
 
         helicopter = new TextureRegion(new Texture("helianimation.jpeg"));
-        heliAnimation = new Animation(new TextureRegion(helicopter), 4, 0.5f);
+        heliAnimation = new Animation(new TextureRegion(helicopter), 4, 0.1f);
 
         heliBounds = new Rectangle(x, y, helicopter.getRegionWidth() / 4, helicopter.getRegionHeight());
         //helicopterAnimation = new Animation(new TextureRegion(texture), 3, 0.5f);
