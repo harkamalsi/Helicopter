@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGdxGame;
@@ -37,7 +38,7 @@ public class PlayState extends State {
         font = new BitmapFont();
 
         for (int i=1; i <= HELICOPTER_COUNT; i++){
-            helicopters.add(new Helicopter(getRandomSpawn(), getRandomSpawn()));
+            helicopters.add(new Helicopter(MathUtils.random(50, 99)*i, MathUtils.random(50, 99)*i));
         }
     }
 

@@ -51,7 +51,7 @@ public class Helicopter {
 
         position = new Vector2(x, y);
         //velocity = new Vector2(10, 0);
-        velocity = new Vector2(getRandomMovement(), getRandomMovement());
+        velocity = new Vector2(MathUtils.random(-5, 5), MathUtils.random(-5, 5));
         //velocity = new Vector2(10,10);
 
         mousePosition = new Vector2(0, 0);
