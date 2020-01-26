@@ -38,6 +38,7 @@ public class Helicopter {
     private int scaleX = -1;
 
     private TextureRegion helicopter;
+    private Animation heliAnimation;
     //private Texture helicopter;
 
     //private Animation helicopterAnimation;
@@ -63,8 +64,10 @@ public class Helicopter {
         //helicopter = new TextureRegion(new Texture("attackhelicopter.png"));
         //heliBounds = new Rectangle(x, y, helicopter.getRegionWidth(), helicopter.getRegionWidth());
 
-        helicopter = new TextureRegion(new Texture("attackhelicopter.png"));
-        heliBounds = new Rectangle(x, y, helicopter.getRegionWidth() / 2, helicopter.getRegionHeight() / 2);
+        helicopter = new TextureRegion(new Texture("helianimation.jpeg"));
+        heliAnimation = new Animation(new TextureRegion(helicopter), 4, 0.5f);
+
+        heliBounds = new Rectangle(x, y, helicopter.getRegionWidth() / 4, helicopter.getRegionHeight() / 4);
         //helicopterAnimation = new Animation(new TextureRegion(texture), 3, 0.5f);
         //blades = Gdx.audio.newSound(Gdx.files.internal("sfx_blades.ogg"));
     }
@@ -74,7 +77,7 @@ public class Helicopter {
     }
 
     public void update(float dt) {
-        //helicopterAnimation.update(dt);
+        heliAnimation.update(dt);
 
         //Need to check for the screens and return the heli in opposite direction
 
@@ -95,8 +98,8 @@ public class Helicopter {
 
         mousePosition.set(Gdx.input.getX() - Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 - Gdx.input.getY());
 
-        float angle = MathUtils.radiansToDegrees * (MathUtils.atan2(mousePosition.y - (helicopter.getRegionHeight() / 2 + position.y),
-                mousePosition.x - (helicopter.getRegionWidth() / 2 + position.x)));
+        float angle = MathUtils.radiansToDegrees * (MathUtils.atan2(mousePosition.y - (helicopter.getRegionHeight() / 4 + position.y),
+                mousePosition.x - (helicopter.getRegionWidth() / 4 + position.x)));
 
         if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
             if(position.y >= 0) {
@@ -208,7 +211,7 @@ public class Helicopter {
 
     //public TextureRegion getTexture() {return birdAnimation.getFrame();}
 
-    public TextureRegion getTexture() {return helicopter;}
+    public TextureRegion getTexture() {return heliAnimation.getFrame();}
 
     public void dispose() {
         //helicopter.dispose();
