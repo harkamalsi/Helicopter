@@ -26,6 +26,7 @@ public class PongState extends State {
         player_paddle = new Paddle(true);
         comp_paddle = new Paddle(false);
         ball = new Ball();
+        comp_paddle.comp_paddle_move();
 
         font = new BitmapFont();
     }
@@ -35,19 +36,32 @@ public class PongState extends State {
         if (Gdx.input.isKeyPressed(Input.Keys.R)) {
             gsm.set(new PongState(gsm));
         }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.UP)) {
+            player_paddle.playerMoveUp();
+        }
+        if (Gdx.input.isKeyJustPressed(Input.Keys.DOWN)) {
+            player_paddle.playerMoveDown();
+        }
+
+
     }
 
     @Override
     protected void update(float dt) {
         handleInput();
 
-        if (collidesWithBall(comp_paddle) || collidesWithBall(player_paddle)) {
-            ball.changeDirection();
+        if (collidesWithBall(player_paddle)) {
+            ball.changeDirectionPlayer(player_paddle.getPosition().y, player_paddle.getBounds().getHeight());
+        }
+        if(collidesWithBall(comp_paddle)) {
+            ball.changeDirectionComp(comp_paddle.getPosition().y, comp_paddle.getBounds().getHeight());
+
         }
 
         ball.update();
         comp_paddle.update();
         player_paddle.update();
+
 
     }
 

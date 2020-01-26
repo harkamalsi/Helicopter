@@ -7,17 +7,20 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.MyGdxGame;
 
+import java.util.concurrent.TimeUnit;
+
 public class Ball {
 
     private Texture ball;
     private Vector2 position, velocity;
     private Rectangle bounds;
+    private Paddle paddle;
 
     public Ball() {
         ball = new Texture("ball.png");
 
-        position = new Vector2(MyGdxGame.WIDTH / 2 - ball.getWidth() / 2, MyGdxGame.HEIGHT / 2);
-        velocity = new Vector2(-5, 0);
+        position = new Vector2(MyGdxGame.WIDTH / 2 , MyGdxGame.HEIGHT / 2);
+        velocity = new Vector2(-5, (float)2.5);
         bounds = new Rectangle(position.x,position.y,ball.getWidth(), ball.getHeight());
     }
 
@@ -26,7 +29,7 @@ public class Ball {
             setPosition(velocity);
             updateBounds();
         } else {
-            changeDirection();
+            changeDirectionRoof();
             setPosition(velocity);
             updateBounds();
         }
@@ -49,8 +52,19 @@ public class Ball {
         return position;
     }
 
-    public void changeDirection() {
-        setVelocity(new Vector2(-velocity.x, -velocity.y));
+    public void changeDirectionPlayer(float player, float height) {
+        setVelocity(new Vector2((-velocity.x * (float)1.1), -(velocity.y * (float)(0.1 * (player - getPosition().y + (height / 2))))));
+        //velocity.add(1,(float)1.1);
+    }
+
+    public void changeDirectionComp(float comp, float height) {
+        setVelocity(new Vector2((-velocity.x * (float)1.1), -(velocity.y * (float)(0.1 * (comp - getPosition().y + (height / 2))))));
+        //velocity.add(1,(float)1.1);
+    }
+
+    public void changeDirectionRoof() {
+        setVelocity(new Vector2((velocity.x * (float)1.1), -(velocity.y )));
+        //velocity.add(1,(float)1.1);
     }
 
     public void changeDirection(Vector2 paddleVelocity) {

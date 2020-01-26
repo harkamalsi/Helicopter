@@ -18,9 +18,9 @@ public class Paddle {
         paddle = new Texture("paddle.png");
 
         if (left) {
-            position = new Vector2(100, MyGdxGame.HEIGHT / 2);
+            position = new Vector2(100, (MyGdxGame.HEIGHT / 2 - paddle.getHeight() / 2));
         } else {
-            position = new Vector2(MyGdxGame.WIDTH - 100, MyGdxGame.HEIGHT / 2);
+            position = new Vector2(MyGdxGame.WIDTH - 100, MyGdxGame.HEIGHT / 2 - (paddle.getHeight() / 2));
         }
 
         velocity = new Vector2(0, 0);
@@ -65,6 +65,18 @@ public class Paddle {
 
     public Rectangle getBounds() {
         return bounds;
+    }
+
+    public void playerMoveUp() {
+        velocity.set(0, 5);
+    }
+
+    public void playerMoveDown() {
+        velocity.set(0, -5);
+    }
+
+    public void comp_paddle_move() {
+        velocity.set(0, -7);
     }
 
 }
