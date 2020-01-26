@@ -137,10 +137,10 @@ public class PlayState extends State {
             sb.draw(helicopters.get(i).getTexture(),
                     helicopters.get(i).getPosition().x,
                     helicopters.get(i).getPosition().y,
-                    helicopters.get(i).getTexture().getRegionWidth() / 4,
-                    helicopters.get(i).getTexture().getRegionHeight() / 4,
                     helicopters.get(i).getTexture().getRegionWidth() / 2,
                     helicopters.get(i).getTexture().getRegionHeight() / 2,
+                    helicopters.get(i).getTexture().getRegionWidth(),
+                    helicopters.get(i).getTexture().getRegionHeight(),
                     helicopters.get(i).getScaleX(),
                    1,
                     0);
