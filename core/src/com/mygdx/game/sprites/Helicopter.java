@@ -35,7 +35,7 @@ public class Helicopter {
 
     private Rectangle heliBounds;
 
-    private int scaleX = -1;
+    private int scaleX = 1;
 
     private TextureRegion helicopter;
     private Animation heliAnimation;
@@ -253,7 +253,7 @@ public class Helicopter {
         float prevVelocityY = velocity.y;
 
         velocity.set(-prevVelocityX, -prevVelocityY);
-        scaleX = scaleX * -1;
+        scaleX = -scaleX;
 
     }
 

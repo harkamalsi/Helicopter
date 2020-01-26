@@ -38,7 +38,8 @@ public class PlayState extends State {
         font = new BitmapFont();
 
         for (int i=1; i <= HELICOPTER_COUNT; i++){
-            helicopters.add(new Helicopter(MathUtils.random(60, 150)*i, MathUtils.random(200, 250)*i));
+            helicopters.add(new Helicopter(MathUtils.random(50, (int) MyGdxGame.WIDTH / 4)*i,
+                    MathUtils.random(200, (int) MyGdxGame.HEIGHT / 4)*i));
         }
     }
 
@@ -69,7 +70,10 @@ public class PlayState extends State {
             for (int j = 0; j <= helicopters.size - 1; j++) {
                 if (i != j && j < helicopters.size - 1 && collides(helicopters.get(i), helicopters.get(j))) {
                     helicopters.get(i).changeDirectionVelocity();
+                    helicopters.get(i).update(dt);
+
                     helicopters.get(j).changeDirectionVelocity();
+                    helicopters.get(j).update(dt);
                 }
             }
 

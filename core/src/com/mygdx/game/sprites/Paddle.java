@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 public class Paddle {
 
     private Vector2 velocity;
-    private  Vector2 position;
+    private Vector2 position;
 
     private TextureRegion paddle;
 
