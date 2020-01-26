@@ -64,7 +64,7 @@ public class Helicopter {
         //heliBounds = new Rectangle(x, y, helicopter.getRegionWidth(), helicopter.getRegionWidth());
 
         helicopter = new TextureRegion(new Texture("attackhelicopter.png"));
-        heliBounds = new Rectangle(x, y, helicopter.getRegionWidth(), helicopter.getRegionHeight());
+        heliBounds = new Rectangle(x, y, helicopter.getRegionWidth() / 2, helicopter.getRegionHeight() / 2);
         //helicopterAnimation = new Animation(new TextureRegion(texture), 3, 0.5f);
         //blades = Gdx.audio.newSound(Gdx.files.internal("sfx_blades.ogg"));
     }

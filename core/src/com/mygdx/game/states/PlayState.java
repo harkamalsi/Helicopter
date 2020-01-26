@@ -65,10 +65,13 @@ public class PlayState extends State {
         for (int i=0; i <= helicopters.size - 1 ; i++){
             helicopters.get(i).update(dt);
 
-            if (i < helicopters.size - 1 && collides(helicopters.get(i), helicopters.get(i + 1))) {
-                helicopters.get(i).changeDirectionVelocity();
-                helicopters.get(i + 1).changeDirectionVelocity();
+            for (int j = 0; j <= helicopters.size - 1; j++) {
+                if (i != j && j < helicopters.size - 1 && collides(helicopters.get(i), helicopters.get(j))) {
+                    helicopters.get(i).changeDirectionVelocity();
+                    helicopters.get(j).changeDirectionVelocity();
+                }
             }
+
         }
 
         //cam.position.x = helicopter.getPosition().x + 80;
@@ -129,14 +132,15 @@ public class PlayState extends State {
         //sb.draw(helicopter.getTexture(), helicopter.getPosition().x, helicopter.getPosition().y);
 
         for (int i=0; i <= helicopters.size-1 ; i++){
-            sb.draw(helicopters.get(i).getTexture(), helicopters.get(i).getPosition().x, helicopters.get(i).getPosition().y);
+            //sb.draw(helicopters.get(i).getTexture(), helicopters.get(i).getPosition().x, helicopters.get(i).getPosition().y);
+
             sb.draw(helicopters.get(i).getTexture(),
                     helicopters.get(i).getPosition().x,
                     helicopters.get(i).getPosition().y,
+                    helicopters.get(i).getTexture().getRegionWidth() / 4,
+                    helicopters.get(i).getTexture().getRegionHeight() / 4,
                     helicopters.get(i).getTexture().getRegionWidth() / 2,
                     helicopters.get(i).getTexture().getRegionHeight() / 2,
-                    helicopters.get(i).getTexture().getRegionWidth(),
-                    helicopters.get(i).getTexture().getRegionHeight(),
                     helicopters.get(i).getScaleX(),
                    1,
                     0);
