@@ -38,7 +38,7 @@ public class PlayState extends State {
         font = new BitmapFont();
 
         for (int i=1; i <= HELICOPTER_COUNT; i++){
-            helicopters.add(new Helicopter(MathUtils.random(50, 99)*i, MathUtils.random(50, 99)*i));
+            helicopters.add(new Helicopter(MathUtils.random(60, 150)*i, MathUtils.random(200, 250)*i));
         }
     }
 
