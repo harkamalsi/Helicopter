@@ -87,8 +87,8 @@ public class PongState extends State {
             System.out.println("player1:" + player1_paddle.getPoints());
         }
 
-        if(player1_paddle.getPoints() >= 3 || player2_paddle.getPoints() >= 3) {
-            gsm.set(new PongState(gsm));
+        if(player1_paddle.getPoints() >= 21 || player2_paddle.getPoints() >= 21) {
+            gsm.set(new GameOver(gsm));
         }
 
         ball.update();
