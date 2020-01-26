@@ -10,6 +10,8 @@ public class Paddle {
 
     private Vector2 velocity, position;
     private Rectangle bounds;
+    private int points;
+
 
     private Texture paddle;
 
@@ -26,6 +28,19 @@ public class Paddle {
         velocity = new Vector2(0, 0);
         bounds = new Rectangle(position.x,position.y,paddle.getWidth(), paddle.getHeight());
     }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void givePoint() {
+        this.points += 1;
+    }
+
+    public String toString() {
+        return ": " + points;
+    }
+
 
     public void update() {
         if (!collidesWithRoofOrGround()) {
@@ -47,7 +62,7 @@ public class Paddle {
     public Texture getTexture() {return paddle;}
 
     public boolean collidesWithRoofOrGround() {
-        if (position.y > 0 && position.y < MyGdxGame.HEIGHT) return false;
+        if (position.y > 0 && position.y + getBounds().getHeight() < MyGdxGame.HEIGHT) return false;
         return true;
     }
 
@@ -67,16 +82,37 @@ public class Paddle {
         return bounds;
     }
 
-    public void playerMoveUp() {
+    public void player1MoveUp() {
         velocity.set(0, 5);
     }
 
-    public void playerMoveDown() {
+    public void player1MoveDown() {
         velocity.set(0, -5);
     }
 
-    public void comp_paddle_move() {
-        velocity.set(0, -7);
+    public void player2MoveUp() {
+        velocity.set(0, 5);
     }
+
+    public void player2MoveDown() {
+        velocity.set(0, -5);
+    }
+
+    public void stop() {
+        velocity.set(0, 0);
+    }
+
+    public void reset(boolean left) {
+        if (left) {
+            position = new Vector2(100, (MyGdxGame.HEIGHT / 2 - paddle.getHeight() / 2));
+        } else {
+            position = new Vector2(MyGdxGame.WIDTH - 100, MyGdxGame.HEIGHT / 2 - (paddle.getHeight() / 2));
+        }
+
+        velocity = new Vector2(0, 0);
+        bounds = new Rectangle(position.x,position.y,paddle.getWidth(), paddle.getHeight());
+    }
+
+
 
 }

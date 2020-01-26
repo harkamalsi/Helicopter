@@ -20,7 +20,7 @@ public class Ball {
         ball = new Texture("ball.png");
 
         position = new Vector2(MyGdxGame.WIDTH / 2 , MyGdxGame.HEIGHT / 2);
-        velocity = new Vector2(-5, (float)2.5);
+        velocity = new Vector2(-5, (float)0);
         bounds = new Rectangle(position.x,position.y,ball.getWidth(), ball.getHeight());
     }
 
@@ -53,12 +53,12 @@ public class Ball {
     }
 
     public void changeDirectionPlayer(float player, float height) {
-        setVelocity(new Vector2((-velocity.x * (float)1.1), -(velocity.y * (float)(0.1 * (player - getPosition().y + (height / 2))))));
+        setVelocity(new Vector2((-velocity.x * (float)1.1), -(velocity.y * (float)(0.1 * (player - getPosition().y + (height / 2))) + (float)(0.1 * (player - getPosition().y + (height / 2))))));
         //velocity.add(1,(float)1.1);
     }
 
     public void changeDirectionComp(float comp, float height) {
-        setVelocity(new Vector2((-velocity.x * (float)1.1), -(velocity.y * (float)(0.1 * (comp - getPosition().y + (height / 2))))));
+        setVelocity(new Vector2((-velocity.x * (float)1.1), -(velocity.y * (float)(0.1 * (comp - getPosition().y + (height / 2))) + (float)(0.1 * (comp - getPosition().y + (height / 2))))));
         //velocity.add(1,(float)1.1);
     }
 
@@ -93,6 +93,17 @@ public class Ball {
 
     public Rectangle getBounds() {
         return bounds;
+    }
+
+    public void reset(boolean won) {
+        position = new Vector2(MyGdxGame.WIDTH / 2 , MyGdxGame.HEIGHT / 2);
+        if(won) {
+            velocity = new Vector2(-(-5), (float)0);
+        }
+        else {
+            velocity = new Vector2(-5, (float)0);
+        }
+        bounds = new Rectangle(position.x,position.y,ball.getWidth(), ball.getHeight());
     }
 
 
