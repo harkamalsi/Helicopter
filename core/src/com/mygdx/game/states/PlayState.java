@@ -62,14 +62,22 @@ public class PlayState extends State {
         handleInput();
         // helicopter.update(dt);
 
-        for (int i=0; i <= helicopters.size-1 ; i++){
+        for (int i=0; i <= helicopters.size - 1 ; i++){
             helicopters.get(i).update(dt);
+
+            if (i < helicopters.size - 1 && collides(helicopters.get(i), helicopters.get(i + 1))) {
+                helicopters.get(i).changeDirectionVelocity();
+                helicopters.get(i + 1).changeDirectionVelocity();
+            }
         }
 
         //cam.position.x = helicopter.getPosition().x + 80;
         //cam.update();
     }
 
+    private boolean collides(Helicopter h1, Helicopter h2) {
+        return h1.getHelicopterRectangle().overlaps(h2.getHelicopterRectangle());
+    }
 
 
     @Override
