@@ -27,6 +27,7 @@ public class Helicopter {
     //private static final int VERTICAL_MOVEMENT = getRandomMovement();
 
     private Vector2 position;
+    private Vector2 prevPosition;
 
     private Rectangle roof;
     private Rectangle ground;
@@ -50,6 +51,7 @@ public class Helicopter {
     public Helicopter(int x, int y) {
 
         position = new Vector2(x, y);
+        prevPosition = new Vector2(0, 0);
         //velocity = new Vector2(10, 0);
         velocity = new Vector2(MathUtils.random(-5, 5), MathUtils.random(-5, 5));
         //velocity = new Vector2(10,10);
@@ -106,10 +108,17 @@ public class Helicopter {
                 if(collides() != -1) changeDirectionVelocity();
 
                 position.add(velocity.x, velocity.y);
+                prevPosition.set(position);
                 heliBounds.setPosition(position.x, position.y);
 
                 if(Gdx.input.isKeyPressed(Input.Keys.R)) {
                     velocity.set(MathUtils.random(-10, 10), MathUtils.random(-10, 10));
+                }
+
+                if (velocity.x >= 0) {
+                    scaleX = -1;
+                } else {
+                    scaleX = 1;
                 }
             }
         } else if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
@@ -119,6 +128,7 @@ public class Helicopter {
                 if(collides() == -1) {
                     velocity.add(mapMouseToVelocity(mousePosition).x, mapMouseToVelocity(mousePosition).y);
                     position.add(velocity.x, velocity.y);
+                    prevPosition.set(position);
                     //Gdx.graphics.getHeight() - helicopter.getRegionHeight()
                     heliBounds.setPosition(position.x, position.y);
 
@@ -127,6 +137,7 @@ public class Helicopter {
                     } else {
                         scaleX = 1;
                     }
+
                 } else {
                     velocity.add(mapMouseToVelocity(mousePosition, true).x,
                             mapMouseToVelocity(mousePosition, true).y);
@@ -136,6 +147,7 @@ public class Helicopter {
                     //Not collision anymore
                     if(collides() == -1) {
                         position.add(mapMouseToVelocity(mousePosition).x, mapMouseToVelocity(mousePosition).y);
+                        prevPosition.set(position);
                         heliBounds.setPosition(position.x, position.y);
                     } else {
                         System.out.println("Pos: " + position);

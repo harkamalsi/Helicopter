@@ -12,7 +12,7 @@ public class MenuState extends State {
 
     public MenuState(GameStateManager gsm) {
         super(gsm);
-        cam.setToOrtho(false, Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
+        cam.setToOrtho(false, MyGdxGame.WIDTH / 2, MyGdxGame.HEIGHT / 2);
         background = new Texture("bg.png");
     }
 

@@ -5,27 +5,35 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.MyGdxGame;
 
 public class Ball {
 
     private Texture ball;
-    private Vector2 position, velocity, bounds;
+    private Vector2 position, velocity;
+    private Rectangle bounds;
 
     public Ball() {
         ball = new Texture("ball.png");
 
-        position = new Vector2(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        velocity = new Vector2(0, 0);
-        bounds = new Vector2(ball.getWidth(), ball.getHeight());
+        position = new Vector2(MyGdxGame.WIDTH / 2 - ball.getWidth() / 2, MyGdxGame.HEIGHT / 2);
+        velocity = new Vector2(-5, 0);
+        bounds = new Rectangle(position.x,position.y,ball.getWidth(), ball.getHeight());
     }
 
     public void update() {
-        setPosition(velocity);
-        bounds.set(position);
+        if (!collidesWithRoofOrGround()) {
+            setPosition(velocity);
+            updateBounds();
+        } else {
+            changeDirection();
+            setPosition(velocity);
+            updateBounds();
+        }
     }
 
-    public boolean collidesWithRoofBottom() {
-        if (position.y > 0 && position.y < Gdx.graphics.getHeight()) return false;
+    public boolean collidesWithRoofOrGround() {
+        if (position.y > 0 && position.y < MyGdxGame.HEIGHT) return false;
         return true;
     }
 
@@ -45,6 +53,10 @@ public class Ball {
         setVelocity(new Vector2(-velocity.x, -velocity.y));
     }
 
+    public void changeDirection(Vector2 paddleVelocity) {
+        setVelocity(new Vector2(-velocity.x, -velocity.y));
+    }
+
     private void setVelocity(Vector2 v) {
         velocity.set(v);
     }
@@ -61,7 +73,13 @@ public class Ball {
         return ball;
     }
 
+    private void updateBounds() {
+        bounds.setPosition(position);
+    }
 
+    public Rectangle getBounds() {
+        return bounds;
+    }
 
 
 
