@@ -1,5 +1,6 @@
 # Helicopter
 Two small games made in android studio.
+Tutorial used: https://www.youtube.com/watch?v=rzBVTPaUUDg&list=PLZm85UZQLd2TPXpUJfDEdWTSgszionbJy 
 
 Here are some pictures of the games:
 
