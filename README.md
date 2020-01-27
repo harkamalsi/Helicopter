@@ -1,5 +1,5 @@
 # Helicopter
-Two small games made in android studio
+Two small games made in android studio.
 
 Here are some pictures of the games:
 
