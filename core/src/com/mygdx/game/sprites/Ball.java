@@ -2,23 +2,18 @@ package com.mygdx.game.sprites;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.MyGdxGame;
-
-import java.util.concurrent.TimeUnit;
 
 public class Ball {
 
     private Texture ball;
     private Vector2 position, velocity;
     private Rectangle bounds;
-    private Paddle paddle;
 
     public Ball() {
         ball = new Texture("ball.png");
-
         position = new Vector2(MyGdxGame.WIDTH / 2 , MyGdxGame.HEIGHT / 2);
         velocity = new Vector2(-5, (float)0);
         bounds = new Rectangle(position.x,position.y,ball.getWidth(), ball.getHeight());
@@ -97,15 +92,19 @@ public class Ball {
 
     public void reset(boolean won) {
         position = new Vector2(MyGdxGame.WIDTH / 2 , MyGdxGame.HEIGHT / 2);
+
         if(won) {
             velocity = new Vector2(-(-5), (float)0);
         }
         else {
             velocity = new Vector2(-5, (float)0);
         }
+
         bounds = new Rectangle(position.x,position.y,ball.getWidth(), ball.getHeight());
     }
 
-
+    public void dispose() {
+        ball.dispose();
+    }
 
 }

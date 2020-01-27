@@ -1,7 +1,6 @@
 package com.mygdx.game.sprites;
 
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.MyGdxGame;
@@ -12,14 +11,12 @@ public class Paddle {
     private Rectangle bounds;
     private int points;
 
-
     private Texture paddle;
 
-
-    public Paddle(boolean left) {
+    public Paddle(boolean leftPlayer) {
         paddle = new Texture("paddle.png");
 
-        if (left) {
+        if (leftPlayer) {
             position = new Vector2(100, (MyGdxGame.HEIGHT / 2 - paddle.getHeight() / 2));
         } else {
             position = new Vector2(MyGdxGame.WIDTH - 100, MyGdxGame.HEIGHT / 2 - (paddle.getHeight() / 2));
@@ -102,8 +99,9 @@ public class Paddle {
         velocity.set(0, 0);
     }
 
-    public void reset(boolean left) {
-        if (left) {
+    public void reset(boolean leftPlayer) {
+
+        if (leftPlayer) {
             position = new Vector2(100, (MyGdxGame.HEIGHT / 2 - paddle.getHeight() / 2));
         } else {
             position = new Vector2(MyGdxGame.WIDTH - 100, MyGdxGame.HEIGHT / 2 - (paddle.getHeight() / 2));
@@ -113,6 +111,8 @@ public class Paddle {
         bounds = new Rectangle(position.x,position.y,paddle.getWidth(), paddle.getHeight());
     }
 
-
+    public void dispose() {
+        paddle.dispose();
+    }
 
 }

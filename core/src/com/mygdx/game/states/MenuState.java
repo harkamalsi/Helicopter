@@ -3,17 +3,21 @@ package com.mygdx.game.states;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.MyGdxGame;
 
 public class MenuState extends State {
 
     private Texture background;
+    private BitmapFont font;
 
     public MenuState(GameStateManager gsm) {
         super(gsm);
-        cam.setToOrtho(false, MyGdxGame.WIDTH / 2, MyGdxGame.HEIGHT / 2);
+        cam.setToOrtho(false, MyGdxGame.WIDTH, MyGdxGame.HEIGHT );
         background = new Texture("bg.png");
+        font = new BitmapFont();
+        font.getData().setScale(2);
     }
 
     @Override
@@ -35,7 +39,9 @@ public class MenuState extends State {
     protected void render(SpriteBatch sb) {
         sb.setProjectionMatrix(cam.combined);
         sb.begin();
-        //sb.draw(background, 0, 0);
+        sb.draw(background, 0, 0, MyGdxGame.WIDTH, MyGdxGame.HEIGHT);
+        font.draw(sb, "Press 1 for Helicopter Task", 10, MyGdxGame.HEIGHT - 50);
+        font.draw(sb, "Press 2 for Pong Task", 10, MyGdxGame.HEIGHT - 100);
         sb.end();
     }
 

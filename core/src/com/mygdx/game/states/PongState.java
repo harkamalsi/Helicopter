@@ -2,16 +2,11 @@ package com.mygdx.game.states;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.GL30;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.sprites.Ball;
 import com.mygdx.game.sprites.Paddle;
-
-import java.awt.Rectangle;
 
 public class PongState extends State {
 
@@ -28,8 +23,8 @@ public class PongState extends State {
         player2_paddle = new Paddle(false);
         ball = new Ball();
 
-
         font = new BitmapFont();
+        font.getData().setScale(1.5f);
     }
 
     @Override
@@ -56,7 +51,9 @@ public class PongState extends State {
             player2_paddle.player2MoveDown();
         }
 
-
+        if(Gdx.input.isKeyJustPressed(Input.Keys.Q)){
+            gsm.set(new MenuState(gsm));
+        }
 
     }
 
@@ -76,7 +73,6 @@ public class PongState extends State {
             player2_paddle.reset(false);
             player2_paddle.givePoint();
             ball.reset(false);
-            System.out.println("player2:" + player2_paddle.getPoints());
         }
 
         if(ball.getPosition().x > 750) {
@@ -84,7 +80,6 @@ public class PongState extends State {
             player2_paddle.reset(false);
             player1_paddle.givePoint();
             ball.reset(true);
-            System.out.println("player1:" + player1_paddle.getPoints());
         }
 
         if(player1_paddle.getPoints() >= 21 || player2_paddle.getPoints() >= 21) {
@@ -95,20 +90,15 @@ public class PongState extends State {
         player2_paddle.update();
         player1_paddle.update();
 
-
     }
 
     private boolean collidesWithBall(Paddle p) {
-        //System.out.println(p.getBounds().overlaps(ball.getBounds()));
         return p.getBounds().overlaps(ball.getBounds());
     }
 
     @Override
     protected void render(SpriteBatch sb) {
         sb.setProjectionMatrix(cam.combined);
-
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 
         sb.begin();
         sb.draw(player2_paddle.getTexture(),
@@ -121,15 +111,20 @@ public class PongState extends State {
                 ball.getPosition().x,
                 ball.getPosition().y);
 
+        font.draw(sb, "Player1" + player1_paddle.toString(), 30, MyGdxGame.HEIGHT - 180 );
+        font.draw(sb, "Player2" + player2_paddle.toString(), 680, MyGdxGame.HEIGHT - 180 );
+        font.draw(sb, "Press Q for menu", 10, MyGdxGame.HEIGHT - 130);
         font.draw(sb, "Press R for reset", 10, MyGdxGame.HEIGHT - 100);
-        font.draw(sb, "Player1" + player1_paddle.toString(), 30, MyGdxGame.HEIGHT - 150 );
-        font.draw(sb, "Player2" + player2_paddle.toString(), 700, MyGdxGame.HEIGHT - 150 );
+        font.draw(sb, "Control Right Player with Arrow UP and Arrow DOWN", 10, MyGdxGame.HEIGHT - 70);
+        font.draw(sb, "Control Left Player with W and S", 10, MyGdxGame.HEIGHT - 40);
 
         sb.end();
     }
 
     @Override
     protected void dispose() {
-
+        player1_paddle.dispose();
+        player2_paddle.dispose();
+        ball.dispose();
     }
 }
