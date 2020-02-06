@@ -60,6 +60,8 @@ public class Paddle {
 
     public boolean collidesWithRoofOrGround() {
         if (position.y > 0 && position.y + getBounds().getHeight() < MyGdxGame.HEIGHT) return false;
+        if(velocity.y > 0 && position.y < 50) return false;
+        if(velocity.y < 0 && position.y < MyGdxGame.HEIGHT + 20 && !(position.y < 50)) return false;
         return true;
     }
 
