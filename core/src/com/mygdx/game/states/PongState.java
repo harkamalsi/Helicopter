@@ -7,12 +7,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.sprites.Ball;
 import com.mygdx.game.sprites.Paddle;
+import com.mygdx.game.sprites.SingleBall;
 
 public class PongState extends State {
 
     private Paddle player1_paddle;
     private Paddle player2_paddle;
-    private Ball ball;
+    //private Ball ball;
+    private SingleBall ball;
 
     private BitmapFont font;
 
@@ -21,7 +23,8 @@ public class PongState extends State {
         cam.setToOrtho(false, MyGdxGame.WIDTH, MyGdxGame.HEIGHT);
         player1_paddle = new Paddle(true);
         player2_paddle = new Paddle(false);
-        ball = new Ball();
+        //ball = new Ball();
+        ball = SingleBall.getInstance();
 
         font = new BitmapFont();
         font.getData().setScale(1.5f);
