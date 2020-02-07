@@ -11,7 +11,7 @@ public class SingleBall {
 
     private Texture ball = new Texture("ball.png");
     private Vector2 position = new Vector2(MyGdxGame.WIDTH / 2 , MyGdxGame.HEIGHT / 2);
-    private Vector2 velocity = new Vector2(-5, (float)0);
+    private Vector2 velocity = new Vector2(5, (float)0);
     private Rectangle bounds =  new Rectangle(position.x,position.y,ball.getWidth(), ball.getHeight());
 
     protected SingleBall() {}
