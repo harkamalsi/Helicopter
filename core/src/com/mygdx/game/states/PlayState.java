@@ -84,11 +84,10 @@ public class PlayState extends State {
                    1,
                     0);
         }
-            font.draw(sb, "Press and hold LEFT MOUSE for random movement", 10, MyGdxGame.HEIGHT - 50);
-            font.draw(sb, "Press and hold RIGHT MOUSE to control the movement with mouse", 10, MyGdxGame.HEIGHT - 80);
+            font.draw(sb, "Switch mode", 10, MyGdxGame.HEIGHT - 50);
+
             font.draw(sb, helicopters.get(0).getPosition().toString(), 10, MyGdxGame.HEIGHT - 110);
-            font.draw(sb, "Press R for reset movement", 10, MyGdxGame.HEIGHT - 140);
-            font.draw(sb, "Press Q for menu", 10, MyGdxGame.HEIGHT - 170);
+
 
         sb.end();
     }

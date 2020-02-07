@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.states.GameOver;
 
 public class Helicopter {
 
@@ -20,6 +21,7 @@ public class Helicopter {
     private Rectangle leftWall;
     private Rectangle rightWall;
     private Rectangle heliBounds;
+    private boolean button = false;
 
     private int scaleX = 1;
 
@@ -49,7 +51,7 @@ public class Helicopter {
         mousePosition.set(Gdx.input.getX() - Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2 - Gdx.input.getY());
 
         //Following checks if random movement or mouse movement should be used
-        if(Gdx.input.isButtonPressed(Input.Buttons.LEFT)) {
+        if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && !button) {
             if(position.y >= 0) {
                 if(collides()) changeDirectionVelocity();
 
@@ -67,7 +69,8 @@ public class Helicopter {
                     scaleX = 1;
                 }
             }
-        } else if (Gdx.input.isButtonPressed(Input.Buttons.RIGHT)) {
+        }
+        else if (Gdx.input.isButtonPressed(Input.Buttons.LEFT) && button) {
             velocity.set(0,0);
             if(position.y >= 0 && !collides()) {
                 velocity.add(mapMouseToVelocity(mousePosition).x, mapMouseToVelocity(mousePosition).y);
@@ -92,6 +95,16 @@ public class Helicopter {
                 } else {
                     heliBounds.setPosition(position.x, position.y);
                 }
+            }
+        }
+        if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && Gdx.input.getX() < Gdx.graphics.getWidth()/10 && Gdx.input.getX() < Gdx.graphics.getHeight()/10) {
+            System.out.println(Gdx.graphics.getHeight());
+
+            if(!button) {
+                button = true;
+            }
+            else if(button) {
+                button = false;
             }
         }
     }

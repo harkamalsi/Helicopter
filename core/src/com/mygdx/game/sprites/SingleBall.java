@@ -101,6 +101,7 @@ public class SingleBall {
         }
 
         public void dispose() {
+            instance = null;
             ball.dispose();
         }
 

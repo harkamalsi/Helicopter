@@ -20,19 +20,19 @@ public class MenuState extends State {
 
     public MenuState(GameStateManager gsm) {
         super(gsm);
-        cam.setToOrtho(false, MyGdxGame.WIDTH, MyGdxGame.HEIGHT );
+        cam.setToOrtho(false, Gdx.graphics.getWidth(), Gdx.graphics.getHeight() );
         background = new Texture("bg.png");
         heligo = new TextureRegion(new Texture("Heligo.png"));
         pong = new TextureRegion(new Texture("Pong.png"));
-        heli_bound = new Rectangle(MyGdxGame.WIDTH/2 - heligo.getRegionWidth()/2 - 80, MyGdxGame.HEIGHT/2 - heligo.getRegionHeight()/2 - 150 , heligo.getRegionWidth() -10, heligo.getRegionHeight()-30);
-        pong_bound = new Rectangle();
+        heli_bound = new Rectangle(Gdx.graphics.getWidth()/2 - heligo.getRegionWidth()/2, Gdx.graphics.getHeight()/2 - heligo.getRegionHeight()/2, heligo.getRegionWidth(), heligo.getRegionHeight());
+        pong_bound = new Rectangle(Gdx.graphics.getWidth()/2 - pong.getRegionWidth()/2, Gdx.graphics.getHeight()/2 - pong.getRegionHeight()/2 +150, pong.getRegionWidth(), pong.getRegionHeight());
+        //test = new Rectangle(pong.getTexture());
 
 
-        pong_bound.x = MyGdxGame.WIDTH/2 - pong.getRegionWidth()/2;
-        pong_bound.y = MyGdxGame.HEIGHT/2 - pong.getRegionHeight()/2 - 150;
-        pong_bound.height = pong.getRegionHeight()/2;
-        pong_bound.width = pong.getRegionWidth()/2;
-        //pong = new TextureRegion(new Texture("Pong.png"));
+
+
+
+
         font = new BitmapFont();
         font.getData().setScale(2);
     }
@@ -41,19 +41,19 @@ public class MenuState extends State {
     protected void handleInput() {
         //if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_1))
 
-       // if(Gdx.input.justTouched() && heli_bound.contains(Gdx.input.getX(), Gdx.input.getY())){
+        if(Gdx.input.justTouched() && heli_bound.contains(Gdx.input.getX(), Gdx.input.getY())){
 
 
-          //  System.out.println(Gdx.input.getX());
-           // System.out.println(Gdx.input.getY());
-            //gsm.set(new PlayState(gsm));
+            System.out.println(Gdx.input.getX());
+            System.out.println(Gdx.input.getY());
+            gsm.set(new PlayState(gsm));
 
-      //  }
-        //if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_2))
-    //  gsm.set(new PongState(gsm));
-        //if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_3))
-           // gsm.set(new GameOver(gsm));
-        gsm.set(new PongState(gsm));
+        }
+        if(Gdx.input.justTouched() && pong_bound.contains(Gdx.input.getX(), Gdx.input.getY()))
+            gsm.set(new PongState(gsm));
+        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_3))
+            gsm.set(new GameOver(gsm));
+        //gsm.set(new PongState(gsm));
     }
 
     @Override
@@ -65,14 +65,14 @@ public class MenuState extends State {
     protected void render(SpriteBatch sb) {
         sb.setProjectionMatrix(cam.combined);
         sb.begin();
-        sb.draw(background, 0, 0, MyGdxGame.WIDTH, MyGdxGame.HEIGHT);
-        sb.draw(heligo.getTexture(), MyGdxGame.WIDTH/2 - heligo.getRegionWidth()/2, MyGdxGame.HEIGHT/2 - heligo.getRegionHeight()/2, heligo.getRegionWidth(), heligo.getRegionHeight());
-        sb.draw(pong.getTexture(), MyGdxGame.WIDTH/2 - pong.getRegionWidth()/2, MyGdxGame.HEIGHT/2 - pong.getRegionHeight()/2 - 150);
+        sb.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        sb.draw(heligo.getTexture(), Gdx.graphics.getWidth()/2 - heligo.getRegionWidth()/2, Gdx.graphics.getHeight()/2 - heligo.getRegionHeight()/2, heligo.getRegionWidth(), heligo.getRegionHeight());
+        sb.draw(pong.getTexture(), Gdx.graphics.getWidth()/2 - pong.getRegionWidth()/2, Gdx.graphics.getHeight()/2 - pong.getRegionHeight()/2 - 150);
 
-        font.draw(sb, "Press 1 for Helicopter Task", 10, MyGdxGame.HEIGHT - 50);
-        font.draw(sb, "Press 1 for Helicopter Task", MyGdxGame.WIDTH/2 - heligo.getRegionWidth()/2, MyGdxGame.HEIGHT/2 - heligo.getRegionHeight()/2);
+        //font.draw(sb, "Press 1 for Helicopter Task", 10, MyGdxGame.HEIGHT - 50);
+        //font.draw(sb, "Press 1 for Helicopter Task", MyGdxGame.WIDTH/2 - heligo.getRegionWidth()/2, MyGdxGame.HEIGHT/2 - heligo.getRegionHeight()/2);
 
-        font.draw(sb, "Press 2 for Pong Task", 10, MyGdxGame.HEIGHT - 100);
+        //font.draw(sb, "Press 2 for Pong Task", 10, MyGdxGame.HEIGHT - 100);
         sb.end();
     }
 
