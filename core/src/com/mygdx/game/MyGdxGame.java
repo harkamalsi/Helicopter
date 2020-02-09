@@ -9,6 +9,12 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.states.GameStateManager;
 import com.mygdx.game.states.MenuState;
 
+/**
+ * Authors:
+ * Harkamaljit Singh
+ * Nikolas Emil Martinsen
+ */
+
 public class MyGdxGame extends ApplicationAdapter {
 	public static final float WIDTH = 800;
 	public static final float HEIGHT = 800;

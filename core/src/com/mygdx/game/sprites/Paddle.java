@@ -35,7 +35,7 @@ public class Paddle {
     }
 
     public String toString() {
-        return ": " + points;
+        return ": " + points + position;
     }
 
 
@@ -48,9 +48,11 @@ public class Paddle {
             setPosition(velocity);
             updateBounds();
         }
+
+
     }
 
-    public void setPosition(Vector2 newPosition) {
+    private void setPosition(Vector2 newPosition) {
         position.add(newPosition);
     }
 
@@ -58,14 +60,14 @@ public class Paddle {
 
     public Texture getTexture() {return paddle;}
 
-    public boolean collidesWithRoofOrGround() {
+    private boolean collidesWithRoofOrGround() {
         if (position.y > 0 && position.y + getBounds().getHeight() < MyGdxGame.HEIGHT) return false;
         if(velocity.y > 0 && position.y < 50) return false;
         if(velocity.y < 0 && position.y < MyGdxGame.HEIGHT + 20 && !(position.y < 50)) return false;
         return true;
     }
 
-    public void changeDirection() {
+    private void changeDirection() {
         setVelocity(new Vector2(-velocity.x, -velocity.y));
     }
 
@@ -96,6 +98,10 @@ public class Paddle {
     public void player2MoveDown() {
         velocity.set(0, -5);
     }
+
+    public void comp_paddleUp() {velocity.set(0, (float)5); }
+
+    public void comp_paddleDown() {velocity.set(0, (float)-5); }
 
     public void stop() {
         velocity.set(0, 0);

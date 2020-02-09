@@ -30,7 +30,7 @@ public class Ball {
         }
     }
 
-    public boolean collidesWithRoofOrGround() {
+    private boolean collidesWithRoofOrGround() {
         if (position.y > 0 && position.y < MyGdxGame.HEIGHT) return false;
         return true;
     }
@@ -39,11 +39,11 @@ public class Ball {
         position.set(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2);
     }
 
-    public void setPosition(Vector2 newPosition) {
+    private void setPosition(Vector2 newPosition) {
         position.add(newPosition);
     }
 
-    public Vector2 getPosition() {
+    private Vector2 getPosition() {
         return position;
     }
 
@@ -57,7 +57,7 @@ public class Ball {
         //velocity.add(1,(float)1.1);
     }
 
-    public void changeDirectionRoof() {
+    private void changeDirectionRoof() {
         setVelocity(new Vector2((velocity.x * (float)1.1), -(velocity.y )));
         //velocity.add(1,(float)1.1);
     }

@@ -5,26 +5,30 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.MyGdxGame;
-import com.mygdx.game.sprites.Ball;
 import com.mygdx.game.sprites.Paddle;
 import com.mygdx.game.sprites.SingleBall;
 
-import java.awt.Rectangle;
-
-public class PongState extends State {
+public class PongSingleState extends State{
 
     private Paddle player1_paddle;
     private Paddle player2_paddle;
+
+    //private Paddle comp_paddle;
+
     //private Ball ball;
     private SingleBall ball;
 
     private BitmapFont font;
 
-    public PongState(GameStateManager gsm) {
+    public PongSingleState(GameStateManager gsm) {
         super(gsm);
         cam.setToOrtho(false, MyGdxGame.WIDTH, MyGdxGame.HEIGHT);
         player1_paddle = new Paddle(true);
         player2_paddle = new Paddle(false);
+        //player2_paddle.comp_paddle();
+
+        //comp_paddle = new Paddle(false);
+
         //ball = new Ball();
         ball = SingleBall.getInstance();
 
@@ -35,7 +39,7 @@ public class PongState extends State {
     @Override
     protected void handleInput() {
         if (Gdx.input.isKeyPressed(Input.Keys.R)) {
-            gsm.set(new PongState(gsm));
+            gsm.set(new PongSingleState(gsm));
         }
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             player1_paddle.player1MoveUp();
@@ -46,23 +50,19 @@ public class PongState extends State {
         if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             player1_paddle.player1MoveDown();
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-            player2_paddle.player2MoveUp();
-        }
-        else{
-            player2_paddle.stop();
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-            player2_paddle.player2MoveDown();
-        }
+        /**if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+         player2_paddle.player2MoveUp();
+         }
+         else{
+         player2_paddle.stop();
+         }
+         if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+         player2_paddle.player2MoveDown();
+         }**/
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.Q)){
             gsm.set(new MenuState(gsm));
         }
-
-        //if(Gdx.input.justTouched()) {
-          //  final Rectangle touch = new Rectangle(Gdx.input.getX(), 10, 1, 1);
-       // }
         if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && Gdx.input.getY() < Gdx.graphics.getHeight()/2 && Gdx.input.getX() < Gdx.graphics.getWidth()/2) {
             System.out.println("UP:");
             System.out.println("Height touched: " + Gdx.input.getY());
@@ -86,28 +86,36 @@ public class PongState extends State {
 
         }
 
-        if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && Gdx.input.getY() < Gdx.graphics.getHeight()/2 && Gdx.input.getX() > Gdx.graphics.getWidth()/2) {
-            System.out.println("UP:");
-            System.out.println("Height touched: " + Gdx.input.getY());
-            System.out.println("Width touched: " + Gdx.input.getX());
-            System.out.print("Middle: " +  Gdx.graphics.getHeight()/2);
-            System.out.println("");
-
-            //System.out.println("Hello");
-            player2_paddle.player2MoveUp();
-
+        if(player2_paddle.getPosition().y + player2_paddle.getTexture().getHeight()/2 > ball.getPosition().y) {
+            player2_paddle.comp_paddleDown();
         }
-        if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && Gdx.input.getY() > Gdx.graphics.getHeight()/2 && Gdx.input.getX() > Gdx.graphics.getWidth()/2) {
-            System.out.print(Gdx.input.getY());
-            System.out.println("DOWN:");
-            System.out.println("Height touched: " + Gdx.input.getY());
-            System.out.println("Width touched: " + Gdx.input.getX());
-            System.out.print("Middle: " +  Gdx.graphics.getHeight()/2);
-            System.out.println("");
-
-            player2_paddle.player2MoveDown();
-
+        if(player2_paddle.getPosition().y + player2_paddle.getTexture().getHeight()/2 < ball.getPosition().y) {
+            player2_paddle.comp_paddleUp();
         }
+
+
+        /**if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && Gdx.input.getY() < Gdx.graphics.getHeight()/2 && Gdx.input.getX() > Gdx.graphics.getWidth()/2) {
+         System.out.println("UP:");
+         System.out.println("Height touched: " + Gdx.input.getY());
+         System.out.println("Width touched: " + Gdx.input.getX());
+         System.out.print("Middle: " +  Gdx.graphics.getHeight()/2);
+         System.out.println("");
+
+         //System.out.println("Hello");
+         player2_paddle.player2MoveUp();
+
+         }
+         if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && Gdx.input.getY() > Gdx.graphics.getHeight()/2 && Gdx.input.getX() > Gdx.graphics.getWidth()/2) {
+         System.out.print(Gdx.input.getY());
+         System.out.println("DOWN:");
+         System.out.println("Height touched: " + Gdx.input.getY());
+         System.out.println("Width touched: " + Gdx.input.getX());
+         System.out.print("Middle: " +  Gdx.graphics.getHeight()/2);
+         System.out.println("");
+
+         player2_paddle.player2MoveDown();
+
+         }**/
 
 
     }
@@ -129,6 +137,7 @@ public class PongState extends State {
             player2_paddle.reset(false);
             player2_paddle.givePoint();
             ball.reset(false);
+            //player2_paddle.comp_paddle();
         }
 
         if(ball.getPosition().x > 750) {
@@ -136,6 +145,8 @@ public class PongState extends State {
             player2_paddle.reset(false);
             player1_paddle.givePoint();
             ball.reset(true);
+            //player2_paddle.comp_paddle();
+
         }
 
         if(player1_paddle.getPoints() >= 21 || player2_paddle.getPoints() >= 21) {

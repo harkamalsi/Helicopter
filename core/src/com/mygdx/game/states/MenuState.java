@@ -50,7 +50,7 @@ public class MenuState extends State {
 
         }
         if(Gdx.input.justTouched() && pong_bound.contains(Gdx.input.getX(), Gdx.input.getY()))
-            gsm.set(new PongState(gsm));
+            gsm.set(new PongSingleState(gsm));
         if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_3))
             gsm.set(new GameOver(gsm));
         //gsm.set(new PongState(gsm));
