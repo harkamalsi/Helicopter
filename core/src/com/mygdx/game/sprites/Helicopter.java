@@ -8,6 +8,8 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.MyGdxGame;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Helicopter {
 
@@ -15,10 +17,9 @@ public class Helicopter {
     private Vector2 velocity;
     private Vector2 mousePosition;
 
-    private Rectangle roof;
-    private Rectangle ground;
-    private Rectangle leftWall;
-    private Rectangle rightWall;
+    private ArrayList<Wall> walls;
+    private Wall roof, ground, leftWall, rightWall;
+
     private Rectangle heliBounds;
     private boolean button = false;
 
@@ -34,10 +35,12 @@ public class Helicopter {
 
         mousePosition = new Vector2(0, 0);
 
-        roof = new Rectangle(0, MyGdxGame.HEIGHT, MyGdxGame.WIDTH, 10);
-        ground = new Rectangle(0, 0, MyGdxGame.WIDTH, 10);
-        leftWall = new Rectangle(0, 0, 10, MyGdxGame.HEIGHT);
-        rightWall = new Rectangle(MyGdxGame.WIDTH, 0, 10, MyGdxGame.HEIGHT);
+        roof = new Wall(0, MyGdxGame.HEIGHT, MyGdxGame.WIDTH, 10);
+        ground = new Wall(0, 0, MyGdxGame.WIDTH, 10);
+        leftWall = new Wall(0, 0, 10, MyGdxGame.HEIGHT);
+        rightWall = new Wall(MyGdxGame.WIDTH, 0, 10, MyGdxGame.HEIGHT);
+
+        walls = new ArrayList<>(Arrays.asList(roof, ground, leftWall, rightWall));
 
         helicopter = new TextureRegion(new Texture("helianimation.jpeg"));
         heliAnimation = new Animation(new TextureRegion(helicopter), 4, 0.1f);
@@ -150,32 +153,30 @@ public class Helicopter {
 
     public TextureRegion getTexture() {return heliAnimation.getFrame();}
 
-    public Rectangle getRoof() {
+    public Wall getRoof() {
         return roof;
     }
 
-    public Rectangle getGround() {
+    public Wall getGround() {
         return ground;
     }
 
-    public Rectangle getLeftWall() {
+    public Wall getLeftWall() {
         return leftWall;
     }
 
-    public Rectangle getRightWall() {
+    public Wall getRightWall() {
         return rightWall;
     }
 
-    public Rectangle getHelicopterRectangle() {
+    public Rectangle getBounds() {
         return heliBounds;
     }
 
     public boolean collides() {
-        if (getRoof().overlaps(getHelicopterRectangle())) return true;
-        if (getGround().overlaps(getHelicopterRectangle())) return true;
-        if (getLeftWall().overlaps(getHelicopterRectangle())) return true;
-        if (getRightWall().overlaps(getHelicopterRectangle())) return true;
-
+        for (Wall w : walls) {
+            if (w.collides(getBounds())) return true;
+        }
         return false;
     }
 

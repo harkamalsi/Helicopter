@@ -33,8 +33,7 @@ public class SingleBall {
         }
 
         private boolean collidesWithRoofOrGround() {
-            if (position.y > 0 && position.y < MyGdxGame.HEIGHT) return false;
-            return true;
+            return !(position.y > 0) || !(position.y < MyGdxGame.HEIGHT);
         }
 
         public void resetPosition() {
@@ -55,14 +54,13 @@ public class SingleBall {
 
 
         public void changeDirectionPlayer(float player, float height) {
-            if(checkMaxSpeed(Math.abs(-(velocity.y * (float)(0.1 * (player - getPosition().y + (height / 2))) + (float)(0.1 * (player - getPosition().y + (height / 2))))), max_y_speed)) {
+            if(checkMaxSpeed(Math.abs(-(velocity.y * (float)(0.1 * (player - getPosition().y + (height / 2))) +
+                    (float)(0.1 * (player - getPosition().y + (height / 2))))), max_y_speed)) {
                 setVelocity(new Vector2((-velocity.x), max_y_speed));
-
             }
             else{
-                setVelocity(new Vector2((-velocity.x), -(velocity.y * (float)(0.1 * (player - getPosition().y + (height / 2))) + (float)(0.1 * (player - getPosition().y + (height / 2))))));
-                //velocity.y = -(velocity.y * (float)(0.1 * (player - getPosition().y + (height / 2))) + (float)(0.1 * (player - getPosition().y + (height / 2))));
-
+                setVelocity(new Vector2((-velocity.x), -(velocity.y * (float)(0.1 * (player - getPosition().y + (height / 2))) +
+                        (float)(0.1 * (player - getPosition().y + (height / 2))))));
             }
             if(checkMaxSpeed(Math.abs(-(velocity.x * (float)1.1)), max_x_speed)) {
                 velocity.scl(1,1);
@@ -70,16 +68,12 @@ public class SingleBall {
             else {
                 velocity.scl((float)1.1, 1);
             }
-
-            //setVelocity(new Vector2((-velocity.x * (float)1.1), -(velocity.y * (float)(0.1 * (player - getPosition().y + (height / 2))) + (float)(0.1 * (player - getPosition().y + (height / 2))))));
-            //velocity.add(1,(float)1.1);
         }
 
 
 
         private void changeDirectionRoof() {
             setVelocity(new Vector2((velocity.x * (float)1.1), -(velocity.y)));
-            //velocity.add(1,(float)1.1);
         }
 
         public void changeDirection(Vector2 paddleVelocity) {
@@ -134,7 +128,7 @@ public class SingleBall {
             }
             return instance;
         }
-        private static SingleBall instance = null;
 
+        private static SingleBall instance = null;
 
 }

@@ -63,7 +63,7 @@ public class PlayState extends State {
     }
 
     private boolean collides(Helicopter h1, Helicopter h2) {
-        return h1.getHelicopterRectangle().overlaps(h2.getHelicopterRectangle());
+        return h1.getBounds().overlaps(h2.getBounds());
     }
 
 

@@ -48,8 +48,6 @@ public class Paddle {
             setPosition(velocity);
             updateBounds();
         }
-
-
     }
 
     private void setPosition(Vector2 newPosition) {
@@ -63,8 +61,7 @@ public class Paddle {
     private boolean collidesWithRoofOrGround() {
         if (position.y > 0 && position.y + getBounds().getHeight() < MyGdxGame.HEIGHT) return false;
         if(velocity.y > 0 && position.y < 50) return false;
-        if(velocity.y < 0 && position.y < MyGdxGame.HEIGHT + 20 && !(position.y < 50)) return false;
-        return true;
+        return !(velocity.y < 0) || !(position.y < MyGdxGame.HEIGHT + 20) || position.y < 50;
     }
 
     private void changeDirection() {

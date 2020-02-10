@@ -21,15 +21,17 @@ public class GameOverState extends State{
 
     @Override
     protected void handleInput() {
-        if(Gdx.input.isKeyJustPressed(Input.Keys.R)){
-            gsm.set(new PongMultiState(gsm));
-        }
+      
         if(Gdx.input.isKeyJustPressed(Input.Keys.Q)){
             gsm.set(new MenuState(gsm));
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.R)){
+            gsm.set(new PongMultiState(gsm));
         }
         if(Gdx.input.justTouched()){
             gsm.set(new MenuState(gsm));
         }
+      
     }
 
     @Override
@@ -41,7 +43,6 @@ public class GameOverState extends State{
     protected void render(SpriteBatch sb) {
         sb.setProjectionMatrix(cam.combined);
         sb.begin();
-        font.draw(sb, "Press R for reset", 10, MyGdxGame.HEIGHT - 80);
         font.draw(sb, "Press Q for menu", 10, MyGdxGame.HEIGHT - 100);
         sb.draw(background, MyGdxGame.WIDTH / 2 - background.getWidth() / 2, MyGdxGame.HEIGHT / 2 - background.getHeight() / 2);
         sb.end();
