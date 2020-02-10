@@ -8,7 +8,7 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.sprites.Paddle;
 import com.mygdx.game.sprites.SingleBall;
 
-public class PongState extends State {
+public class PongMultiState extends State {
 
     private Paddle player1_paddle;
     private Paddle player2_paddle;
@@ -17,7 +17,7 @@ public class PongState extends State {
 
     private BitmapFont font;
 
-    public PongState(GameStateManager gsm) {
+    public PongMultiState(GameStateManager gsm) {
         super(gsm);
         cam.setToOrtho(false, MyGdxGame.WIDTH, MyGdxGame.HEIGHT);
         player1_paddle = new Paddle(true);
@@ -32,7 +32,7 @@ public class PongState extends State {
     @Override
     protected void handleInput() {
         if (Gdx.input.isKeyPressed(Input.Keys.R)) {
-            gsm.set(new PongState(gsm));
+            gsm.set(new PongMultiState(gsm));
         }
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             player1_paddle.player1MoveUp();

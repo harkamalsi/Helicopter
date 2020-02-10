@@ -150,7 +150,7 @@ public class PongSingleState extends State{
         }
 
         if(player1_paddle.getPoints() >= 21 || player2_paddle.getPoints() >= 21) {
-            gsm.set(new GameOver(gsm));
+            gsm.set(new GameOverState(gsm));
         }
 
         ball.update();

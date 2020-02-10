@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
-import com.mygdx.game.MyGdxGame;
 
 public class MenuState extends State {
 
@@ -52,8 +51,8 @@ public class MenuState extends State {
         if(Gdx.input.justTouched() && pong_bound.contains(Gdx.input.getX(), Gdx.input.getY()))
             gsm.set(new PongSingleState(gsm));
         if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_3))
-            gsm.set(new GameOver(gsm));
-        //gsm.set(new PongState(gsm));
+            gsm.set(new GameOverState(gsm));
+        //gsm.set(new PongMultiState(gsm));
     }
 
     @Override

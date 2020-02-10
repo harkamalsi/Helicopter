@@ -7,12 +7,12 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.MyGdxGame;
 
-public class GameOver extends State{
+public class GameOverState extends State{
 
     private Texture background;
     private BitmapFont font;
 
-    public GameOver(GameStateManager gsm) {
+    public GameOverState(GameStateManager gsm) {
         super(gsm);
         cam.setToOrtho(false, MyGdxGame.WIDTH, MyGdxGame.HEIGHT);
         background = new Texture("game_over.jpg");
@@ -22,9 +22,12 @@ public class GameOver extends State{
     @Override
     protected void handleInput() {
         if(Gdx.input.isKeyJustPressed(Input.Keys.R)){
-            gsm.set(new PongState(gsm));
+            gsm.set(new PongMultiState(gsm));
         }
         if(Gdx.input.isKeyJustPressed(Input.Keys.Q)){
+            gsm.set(new MenuState(gsm));
+        }
+        if(Gdx.input.justTouched()){
             gsm.set(new MenuState(gsm));
         }
     }
