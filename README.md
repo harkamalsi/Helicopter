@@ -82,16 +82,16 @@ Relationships:
 
 Differences:
 
--Architectural patterns has a wider scope and are used to solve a common
+-Architectural patterns have a wider scope and are used to solve a common
  recurring problem in software architecture.
 
--Design patterns however are used to solve specific problems and are
+-Design patterns, however, are used to solve specific problems and are
 typically lower level.
 
 4.b)
 Template Method:
 
-State works as template class
+State class works as template class
 
 MenuState, PlayState, PongState, PongSingleState and GameOverState all
 extends the State class.
