@@ -5,11 +5,8 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.MyGdxGame;
-import com.mygdx.game.sprites.Ball;
 import com.mygdx.game.sprites.Paddle;
 import com.mygdx.game.sprites.SingleBall;
-
-import java.awt.Rectangle;
 
 public class PongState extends State {
 
@@ -139,7 +136,7 @@ public class PongState extends State {
         }
 
         if(player1_paddle.getPoints() >= 21 || player2_paddle.getPoints() >= 21) {
-            gsm.set(new GameOver(gsm));
+            gsm.set(new GameOverState(gsm));
         }
 
         ball.update();

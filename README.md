@@ -21,40 +21,108 @@ Here are some pictures of the games:
 
 ![Pong3](https://user-images.githubusercontent.com/44194036/73175676-ff7bc000-410a-11ea-8123-00e44834c690.PNG)
 
-## Theory tasks for exercise 2
+## Exercise 2
+
+### Step 1
+
+We have chosen task4 Pong game from the first exercise as our base
+
+### Step 2
+
+We have chosen to implement a Singleton pattern for our Ball class(we
+created a new class called SingleBall so we keep our Ball class but it
+isn't used), since all Pong traditional pong games deals with only one
+ball object at a time.
+
+### Step 3
+
+We have followed this flappy bird [tutorial](https://www.youtube.com/watch?v=rzBVTPaUUDg&list=PLZm85UZQLd2TPXpUJfDEdWTSgszionbJy)
+to get used to libGDX, where we have used the template and state pattern.
+
+MenuState, PlayState(from helicopter tasks), PongSingleState, GameOverState
+extends the abstract class state and inherits its methods and variables.
+They are utilizing the template method.
+
+State pattern is realized through having gamestates to keep track of
+which objects, game behaviour the game should load, and dispose of when
+we leave our previous state. The class GameStateManager manages and keeps
+track of our current gamestate.
+
+
+### Theory tasks for exercise 2
 
 4.a)
 
 Architectural patterns:
+
 -Model view controller
+
 -Pipe and filter
+
 -Entity Component System
 
 Design patterns:
+
 -Observer
+
 -State
+
 -Template Method
+
 -Abstract Factory
 
 
 Relationships:
+
 -They both deal with solving problems in the software application
 
 Differences:
--Architectural patterns has a wider scope and are used to solve a common reccuring problem in software architecture.
--Desing patterns however are used to solve specific problems and are typically lower level.
+
+-Architectural patterns has a wider scope and are used to solve a common
+ recurring problem in software architecture.
+
+-Design patterns however are used to solve specific problems and are
+typically lower level.
 
 4.b)
 Template Method:
+
 State works as template class
-MenuState, PlayState, PongState and GameOver all extends the State class.
+
+MenuState, PlayState, PongState, PongSingleState and GameOverState all
+extends the State class.
 
 Observer:
 
 4.c)
-Advantages in using Template Method:
-Since we have several states, using template method we can define general methods and implement the specialized methods.
+
+Template Method:
+
+Advantages:
+
+Since we have several states, using template method we can define
+general methods and implement the specialized methods.
 
 Disadvantages:
-Problem is that we have to implement several almost identical pieces of code
+
+Problem is that we have to implement several almost identical pieces of
+code. for example in the states [folder](https://github.com/harkamalsi/Helicopter/tree/master/core/src/com/mygdx/game/states)
+we have PongSingleState and PongMultiState where the main difference is
+in single there is 1 player against the computer and in multi there are
+2 players.
+
+State Method:
+
+Advantages:
+
+Easy to keep track of which state we are in and load objects and behaviours,
+and dispose of objects not longer needed when transitioning to a the next
+state. It can reduce complexity and can remove the need to use switch
+statements for objects that has different behaviour.
+
+Disadvantages:
+
+The FSM scheme can quickly grow large needing a lot of code which can be
+similar.
+
 
