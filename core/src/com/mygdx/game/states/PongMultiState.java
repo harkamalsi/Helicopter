@@ -8,7 +8,7 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.sprites.Paddle;
 import com.mygdx.game.sprites.SingleBall;
 
-public class PongState extends State {
+public class PongMultiState extends State {
 
     private Paddle player1_paddle;
     private Paddle player2_paddle;
@@ -17,7 +17,7 @@ public class PongState extends State {
 
     private BitmapFont font;
 
-    public PongState(GameStateManager gsm) {
+    public PongMultiState(GameStateManager gsm) {
         super(gsm);
         cam.setToOrtho(false, MyGdxGame.WIDTH, MyGdxGame.HEIGHT);
         player1_paddle = new Paddle(true);
@@ -32,7 +32,7 @@ public class PongState extends State {
     @Override
     protected void handleInput() {
         if (Gdx.input.isKeyPressed(Input.Keys.R)) {
-            gsm.set(new PongState(gsm));
+            gsm.set(new PongMultiState(gsm));
         }
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             player1_paddle.player1MoveUp();
@@ -57,62 +57,26 @@ public class PongState extends State {
             gsm.set(new MenuState(gsm));
         }
 
-        //if(Gdx.input.justTouched()) {
-          //  final Rectangle touch = new Rectangle(Gdx.input.getX(), 10, 1, 1);
-       // }
         if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && Gdx.input.getY() < Gdx.graphics.getHeight()/2 && Gdx.input.getX() < Gdx.graphics.getWidth()/2) {
-            System.out.println("UP:");
-            System.out.println("Height touched: " + Gdx.input.getY());
-            System.out.println("Width touched: " + Gdx.input.getX());
-            System.out.print("Middle: " +  Gdx.graphics.getHeight()/2);
-            System.out.println("");
-
-            //System.out.println("Hello");
             player1_paddle.player1MoveUp();
 
         }
         if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && Gdx.input.getY() > Gdx.graphics.getHeight()/2 && Gdx.input.getX() < Gdx.graphics.getWidth()/2) {
-            System.out.print(Gdx.input.getY());
-            System.out.println("DOWN:");
-            System.out.println("Height touched: " + Gdx.input.getY());
-            System.out.println("Width touched: " + Gdx.input.getX());
-            System.out.print("Middle: " +  Gdx.graphics.getHeight()/2);
-            System.out.println("");
-
             player1_paddle.player1MoveDown();
-
         }
 
         if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && Gdx.input.getY() < Gdx.graphics.getHeight()/2 && Gdx.input.getX() > Gdx.graphics.getWidth()/2) {
-            System.out.println("UP:");
-            System.out.println("Height touched: " + Gdx.input.getY());
-            System.out.println("Width touched: " + Gdx.input.getX());
-            System.out.print("Middle: " +  Gdx.graphics.getHeight()/2);
-            System.out.println("");
-
-            //System.out.println("Hello");
             player2_paddle.player2MoveUp();
-
         }
         if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && Gdx.input.getY() > Gdx.graphics.getHeight()/2 && Gdx.input.getX() > Gdx.graphics.getWidth()/2) {
-            System.out.print(Gdx.input.getY());
-            System.out.println("DOWN:");
-            System.out.println("Height touched: " + Gdx.input.getY());
-            System.out.println("Width touched: " + Gdx.input.getX());
-            System.out.print("Middle: " +  Gdx.graphics.getHeight()/2);
-            System.out.println("");
-
             player2_paddle.player2MoveDown();
-
         }
-
 
     }
 
     @Override
     protected void update(float dt) {
         handleInput();
-
 
         if (collidesWithBall(player1_paddle)) {
             ball.changeDirectionPlayer(player1_paddle.getPosition().y, player1_paddle.getBounds().getHeight());
