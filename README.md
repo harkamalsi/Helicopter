@@ -1,4 +1,6 @@
-# Helicopter
+# TDT4240 Programvarearkitektur
+
+## Excercise 1
 
 Two small games made in android studio.
 Tutorial used: https://www.youtube.com/watch?v=rzBVTPaUUDg&list=PLZm85UZQLd2TPXpUJfDEdWTSgszionbJy 
@@ -25,7 +27,9 @@ Here are some pictures of the games:
 
 ### Step 1
 
-We have chosen task4 Pong game from the first exercise as our base
+We have chosen task4 Pong game from the first exercise as our base, but we 
+also made some changes to collision detection in Helicopter game;
+see the template method implented under step 3. 
 
 ### Step 2
 
@@ -78,21 +82,24 @@ Relationships:
 
 Differences:
 
--Architectural patterns has a wider scope and are used to solve a common
+-Architectural patterns have a wider scope and are used to solve a common
  recurring problem in software architecture.
 
--Design patterns however are used to solve specific problems and are
+-Design patterns, however, are used to solve specific problems and are
 typically lower level.
 
 4.b)
 Template Method:
 
-State works as template class
+State class works as template class
 
 MenuState, PlayState, PongState, PongSingleState and GameOverState all
 extends the State class.
 
-Observer:
+RectangleShapeGenerator is also working as a template class. Wall class extends
+the RectangleShapeGenerator class, but it is also possible, in future, 
+to use other Rectangles that can extend RectangleShapeGenerator.
+Wall class is also used for collision detections in Helicopter game. 
 
 4.c)
 

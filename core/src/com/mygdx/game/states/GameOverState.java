@@ -21,11 +21,17 @@ public class GameOverState extends State{
 
     @Override
     protected void handleInput() {
-
+      
         if(Gdx.input.isKeyJustPressed(Input.Keys.Q)){
             gsm.set(new MenuState(gsm));
         }
-
+        if(Gdx.input.isKeyJustPressed(Input.Keys.R)){
+            gsm.set(new PongMultiState(gsm));
+        }
+        if(Gdx.input.justTouched()){
+            gsm.set(new MenuState(gsm));
+        }
+      
     }
 
     @Override
