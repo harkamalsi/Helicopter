@@ -1,4 +1,5 @@
 # Helicopter
+
 Two small games made in android studio.
 Tutorial used: https://www.youtube.com/watch?v=rzBVTPaUUDg&list=PLZm85UZQLd2TPXpUJfDEdWTSgszionbJy 
 
@@ -19,3 +20,41 @@ Here are some pictures of the games:
 ![Pong2](https://user-images.githubusercontent.com/44194036/73175662-f985df00-410a-11ea-8bf1-e39f9582293d.PNG)
 
 ![Pong3](https://user-images.githubusercontent.com/44194036/73175676-ff7bc000-410a-11ea-8123-00e44834c690.PNG)
+
+## Theory tasks for exercise 2
+
+4.a)
+
+Architectural patterns:
+-Model view controller
+-Pipe and filter
+-Entity Component System
+
+Design patterns:
+-Observer
+-State
+-Template Method
+-Abstract Factory
+
+
+Relationships:
+-They both deal with solving problems in the software application
+
+Differences:
+-Architectural patterns has a wider scope and are used to solve a common reccuring problem in software architecture.
+-Desing patterns however are used to solve specific problems and are typically lower level.
+
+4.b)
+Template Method:
+State works as template class
+MenuState, PlayState, PongState and GameOver all extends the State class.
+
+Observer:
+
+4.c)
+Advantages in using Template Method:
+Since we have several states, using template method we can define general methods and implement the specialized methods.
+
+Disadvantages:
+Problem is that we have to implement several almost identical pieces of code
+
