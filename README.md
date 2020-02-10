@@ -1,4 +1,6 @@
-# Helicopter
+# TDT4240 Programvarearkitektur
+
+## Excercise 1
 
 Two small games made in android studio.
 Tutorial used: https://www.youtube.com/watch?v=rzBVTPaUUDg&list=PLZm85UZQLd2TPXpUJfDEdWTSgszionbJy 
