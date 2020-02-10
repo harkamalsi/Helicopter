@@ -35,7 +35,7 @@ public class Paddle {
     }
 
     public String toString() {
-        return ": " + points + position;
+        return ": " + points;
     }
 
 

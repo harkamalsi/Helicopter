@@ -64,23 +64,23 @@ public class PongSingleState extends State{
             gsm.set(new MenuState(gsm));
         }
         if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && Gdx.input.getY() < Gdx.graphics.getHeight()/2 && Gdx.input.getX() < Gdx.graphics.getWidth()/2) {
-            System.out.println("UP:");
-            System.out.println("Height touched: " + Gdx.input.getY());
-            System.out.println("Width touched: " + Gdx.input.getX());
-            System.out.print("Middle: " +  Gdx.graphics.getHeight()/2);
-            System.out.println("");
+            //System.out.println("UP:");
+            //System.out.println("Height touched: " + Gdx.input.getY());
+            //System.out.println("Width touched: " + Gdx.input.getX());
+            //System.out.print("Middle: " +  Gdx.graphics.getHeight()/2);
+            //System.out.println("");
 
             //System.out.println("Hello");
             player1_paddle.player1MoveUp();
 
         }
         if(Gdx.input.isButtonPressed(Input.Buttons.LEFT) && Gdx.input.getY() > Gdx.graphics.getHeight()/2 && Gdx.input.getX() < Gdx.graphics.getWidth()/2) {
-            System.out.print(Gdx.input.getY());
-            System.out.println("DOWN:");
-            System.out.println("Height touched: " + Gdx.input.getY());
-            System.out.println("Width touched: " + Gdx.input.getX());
-            System.out.print("Middle: " +  Gdx.graphics.getHeight()/2);
-            System.out.println("");
+            //System.out.print(Gdx.input.getY());
+            //System.out.println("DOWN:");
+            //System.out.println("Height touched: " + Gdx.input.getY());
+            //System.out.println("Width touched: " + Gdx.input.getX());
+            //System.out.print("Middle: " +  Gdx.graphics.getHeight()/2);
+            //System.out.println("");
 
             player1_paddle.player1MoveDown();
 
