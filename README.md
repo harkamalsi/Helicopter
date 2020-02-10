@@ -27,7 +27,9 @@ Here are some pictures of the games:
 
 ### Step 1
 
-We have chosen task4 Pong game from the first exercise as our base
+We have chosen task4 Pong game from the first exercise as our base, but we 
+also made some changes to collision detection in Helicopter game;
+see the template method implented under step 3. 
 
 ### Step 2
 
@@ -97,6 +99,7 @@ extends the State class.
 RectangleShapeGenerator is also working as a template class. Wall class extends
 the RectangleShapeGenerator class, but it is also possible, in future, 
 to use other Rectangles that can extend RectangleShapeGenerator.
+Wall class is also used for collision detections in Helicopter game. 
 
 4.c)
 
