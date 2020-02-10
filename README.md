@@ -94,7 +94,9 @@ State works as template class
 MenuState, PlayState, PongState, PongSingleState and GameOverState all
 extends the State class.
 
-Observer:
+RectangleShapeGenerator is also working as a template class. Wall class extends
+the RectangleShapeGenerator class, but it is also possible, in future, 
+to use other Rectangles that can extend RectangleShapeGenerator.
 
 4.c)
 
